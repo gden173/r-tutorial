@@ -1,0 +1,2706 @@
+                            EXPERT                                 OIML E 7
+                            REPORT                                Edition 2015 (E)
+
+
+
+
+                            Modelling the economic impact of legal metrology
+OIML E 7 Edition 2015 (E)
+
+
+
+
+                                                       ORGANISATION INTERNATIONALE
+                                                             DE MÉTROLOGIE LÉGALE
+
+
+                                                        INTERNATIONAL ORGANIZATION
+                                                                OF LEGAL METROLOGY
+                               DISCLAIMER
+
+Expert Reports are intended to provide information and advice, and are written
+   solely from the viewpoint of their author, without the involvement of a
+        Technical Committee or Subcommittee, nor that of the CIML.
+
+        Thus, they do not necessarily represent the views of the OIML.
+                                                             OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+
+
+CONTENTS
+
+OIML Foreword ................................................................................................................................................................ 5
+
+MODELLING THE ECONOMIC IMPACT OF LEGAL METROLOGY .................................................................................... 6
+
+   Executive Summary ............................................................................................................................................. 7
+
+   I)        Legal metrology, Society and Trade............................................................................................................ 9
+
+         A history of social and economic benefits ...................................................................................................... 9
+
+         The creation of an international network of metrology organisations ......................................................... 10
+
+   II)       Identifying the economic and social benefits of metrological systems .................................................... 12
+
+         Fundamental economic benefits in the literature ........................................................................................ 12
+
+         Benefits to international trade...................................................................................................................... 13
+
+         Quantifying the benefits of legal metrology ................................................................................................. 15
+
+         The ISO methodology .................................................................................................................................... 16
+
+   III)      Measuring the impact of legal metrology on growth ............................................................................... 18
+
+         Legal metrology, standards and innovation .................................................................................................. 18
+
+         EMPIRICAL ESTIMATIONS USING THE STOCK OF STANDARDS ....................................................... 20
+
+         SPENDING IN METROLOGY AND AGGREGATE PRODUCTIVITY ....................................................... 22
+
+   IV)       Guidelines for an econometric analysis at the macro level: ..................................................................... 25
+
+   V)        Lessons learned from sectorial case STUDIES........................................................................................... 27
+
+         Benefits for producers .................................................................................................................................. 27
+
+         Benefits for consumers ................................................................................................................................. 33
+
+         Impact of Measurement methodology ......................................................................................................... 34
+
+   VI)       Modelling the microeconomic impact of measurement .......................................................................... 35
+
+         Transaction costs........................................................................................................................................... 36
+
+         Productivity increase ..................................................................................................................................... 38
+
+         Price increase ................................................................................................................................................ 41
+
+         Social welfare ................................................................................................................................................ 43
+
+   VII)    Case studies: assessing the impact of the maximum permissible error requirements in the australian
+   wheat, coal and sugar industries ....................................................................................................................... 45
+
+         Selecting an existing model as a starting point ............................................................................................. 45
+
+         Application to the Australian wheat, sugar and coal industries ................................................................... 50
+
+   Conclusion ......................................................................................................................................................... 56
+
+   Bibliography ...................................................................................................................................................... 57
+
+   Appendix: R code .............................................................................................................................................. 59
+
+                                                                                       3
+                                       OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+
+
+                                         OIML Foreword
+The International Organization of Legal Metrology (OIML) is a worldwide, intergovernmental organization whose
+primary aim is to harmonize the regulations and metrological controls applied by the national metrological
+services, or related organizations, of its Member States. The main categories of OIML publications are:
+
+      •     International Recommendations (OIML R), which are model regulations that establish the
+            metrological characteristics required of certain measuring instruments and which specify methods
+            and equipment for checking their conformity. OIML Member States shall implement these
+            Recommendations to the greatest possible extent;
+
+      •     International Documents (OIML D), which are informative in nature and which are intended to
+            harmonize and improve work in the field of legal metrology;
+
+      •     International Guides (OIML G), which are also informative in nature and which are intended to give
+            guidelines for the application of certain requirements to legal metrology;
+
+      •     International Basic Publications (OIML B), which define the operating rules of the various OIML
+            structures and systems; and
+
+OIML Draft Recommendations, Documents and Guides are developed by Project Groups linked to Technical
+Committees or Subcommittees which comprise representatives from OIML Member States. Certain international
+and regional institutions also participate on a consultation basis. Cooperative agreements have been established
+between the OIML and certain institutions, such as ISO and the IEC, with the objective of avoiding contradictory
+requirements. Consequently, manufacturers and users of measuring instruments, test laboratories, etc. may
+simultaneously apply OIML publications and those of other institutions.
+
+International Recommendations, Documents, Guides and Basic Publications are published in English (E) and
+translated into French (F) and are subject to periodic revision.
+
+Additionally, the OIML publishes or participates in the publication of Vocabularies (OIML V) and periodically
+commissions legal metrology experts to write Expert Reports (OIML E). Expert Reports are intended to provide
+information and advice, and are written solely from the viewpoint of their author, without the involvement of a
+Technical Committee or Subcommittee, nor that of the CIML. Thus, they do not necessarily represent the views
+of the OIML.
+
+This publication, OIML E 7, edition 2015 (E) – was written by Yasmine Bekkouche and Caroline Jeangeorges,
+students of the Paris-based National School of Statistics and Economic Administration under the supervision of
+Dr. Valerie Villiere, the CIML Member for Australia.
+
+OIML Publications may be downloaded from the OIML web site in the form of PDF files. Additional information
+on OIML Publications may be obtained from the Organization’s headquarters:
+
+Bureau International de Métrologie Légale
+11, rue Turgot - 75009 Paris - France
+Telephone: 33 (0)1 48 78 12 82
+Fax:         33 (0)1 42 82 17 27
+E-mail:      biml@oiml.org
+Internet:    www.oiml.org
+
+
+
+
+                                                       5
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+
+
+                 MODELLING THE ECONOMIC IMPACT
+                      OF LEGAL METROLOGY
+
+
+This report, commissioned by the International Organization of Legal Metrology (OIML –
+Organisation Internationale de Métrologie Légale), is the result of the collaboration between
+the OIML and ENSAE Junior Etude (Yasmine Bekkouche and Caroline Jeangeorges). Its
+purpose is to show how important the metrological standards, norms and recommendations
+of legal metrology are for producers, consumers and the economy and society at large. We
+begin by reviewing some of the literature on the economics of standards and legal metrology.
+The bulk of the report is then suggesting a model for assessing and quantifying the economic
+benefits of adopting legal metrology standards at the firm, sector and national levels.
+
+If many studies and surveys describe these potential benefits, very few give a reproducible
+methodology to quantify precisely the impact of metrology on wealth and value creation. The
+difficulty is well known: in the absence of a counterfactual, identifying and modelling the
+effects of standard adoption or the return on investments in metrology is a complex matter.
+This report examines the literature on that topic (parts I to IV) – though not exhaustively – in
+order to determine the different elements to include in our model.
+
+Guidelines for a macro econometric model are put forward, as well as benefits identified in
+microeconomic case studies (part V). A theoretical model is then put forward to analyse the
+benefits of legal metrology (part VI). Finally we will illustrate this report with a case study
+(part VII) evaluating the impact of legal metrology in three Australian sectors: wheat, sugar
+and coal. The OIML, through Dr. Valerie Villiere, has followed closely the different steps of the
+conception of the report. We would like to thank her and the OIML for their support.
+However, any mistakes and imprecisions remain of the authors’ responsibility alone.
+
+
+
+
+                                               6
+                                  OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+
+
+EXECUTIVE SUMMARY
+
+The report begins with a literature review centred on the benefits scientific, industrial and
+legal metrologies have brought to societies since the 18th century. Works in history,
+economics and social sciences are used to understand the social and economic benefits
+associated with the construction of an international system of units followed by a global
+network of metrological organisations still expanding today.
+
+Moving on to the specialized literature in economics of metrology and standards, Section II
+sums up the most generally accepted benefits of every metrology- and standard-related
+activity that might be of interest in order to appraise the gains brought by legal metrology
+itself. That includes benefits to international trade, which are to a large extent the product of
+international harmonization and cooperation in legal metrology. In conclusion of the
+literature review, we address the problem of quantifying the economic benefits of legal
+metrology by summarizing the different options available and presenting the ISO framework
+for identifying the assets in an organisation that legal metrology can be beneficial to.
+
+The third section of the report examines how different measures of the activity of national
+metrology organisations are used in the literature to estimate the impact of metrology on
+growth and innovation. Those measures include: government spending metrology R&D, stock
+of standards, patents and publications and sector-specific advantages. The possibility of using
+similar indicators (proxies) for estimating the economic benefits of legal metrology is
+discussed, on the basis that standardisation and legal metrology activities such as conformity
+assessment involve the same actors and produce comparable benefits. Section III goes on
+reviewing a selection of studies on the impact of legal metrology and standardisation on
+innovation, aggregate productivity or labour productivity.
+
+Section IV provides some methodological elements for building an econometric model at the
+macro level. Various explained variables for the model as well as proxies for legal metrology
+activity are discussed. A method is described for an analysis with an international scope.
+
+Section V focuses on the microeconomic benefits of legal metrology underpinning the models
+presented in sections III and IV. Benefits for producers and consumers are identified in
+sectorial case studies selected in the literature. Such benefits include: reduced transaction
+costs (search and information, bargaining, enforcement); increased productivity; access to
+new markets; information, quality and price premium. On the consumers’ side, advantages
+include: information, quality assurance, new products and network effects.
+
+Section VI presents a theoretical model for for quantifying the gain brought by conformity to
+legal metrology requirements to the profits of producers. Drawing from the producer
+microeconomic theory, the proposed maximisation programme takes into account the effect
+of legal metrology in the objective function of the producer in order to augment its benefits.
+
+
+                                                7
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+Another model is put forward, to help determine to optimal amount of public investment in
+metrology and standardisation.
+
+Section VII develops a method to quantify the effects of uniform maximum permissible errors
+(MPE) in trade. Impact study on the divergence of MPEs is a way to quantify the economic
+benefits of legal metrology. Indeed legal metrology is used to ensure smooth transaction in
+trade particularly by fixing MPEs. Two types of divergence of the MPEs between buyer and
+seller are examined. The first type is a small deviation in the MPEs that correspond to a
+translation of the testing limit of the measurement instrument. This translation leads to
+differences in the testing limit for the product traded. The second divergence considered is
+the situation where the MPEs are of different magnitudes. In this second case, an economic
+loss of 9,299,354 AUD over three industries is found for the hypothetical situation where the
+Australian MPEs would be twice higher than the international one.
+
+
+
+
+                                              8
+                                       OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+I)   LEGAL METROLOGY, SOCIETY AND TRADE
+
+
+
+
+     A HISTORY OF SOCIAL AND ECONOMIC BENEFITS
+
+     For over five millennia, societies have invented and refined means to measure time, weights,
+     distances, frequencies, areas. Metrology, in its widest sense, is the science of measurement
+     and it is safe to say that is has steadily brought benefits to the economies of all societies. By
+     ensuring that the standards we use – ideas and objects we deem good benchmarks – have
+     precise values that make them useful for comparison, metrology plays an essential role in our
+     economic lives. As the literature on the history of metrology shows, the development of
+     metrology systems and legal standards has been instrumental in the expansion of domestic
+     and international trade. The need for consistent and reliable measurements is old: ancient
+     metrological systems were based on the features of a sovereign (such as the arm length of
+     the pharaoh in ancient Egypt), followed precepts in the holy books or royal decrees. With the
+     expansions of cities, public infrastructure and manufactured goods, metrology became an
+     increasingly important (but not always visible) part of everyday life.
+
+     The importance of accurate and transparent measurement grew again with the standards,
+     laws and legal requirements brought by the consolidation of the State in the 18th and 19th
+     centuries, as well as with the expansion of industry. In the last decades, following the rapid
+     growth of international trade, metrology evolved toward the standardization of measurement
+     units and methods in a globalized world. The literature on the development of metrology and
+     its history is vast, but a good starting point would be the collective book edited by (Wise
+     1997), exploring the rise of quantitative precision as a fundamental value of modern science
+     and industry. Other valuable sources on the history of measurement include: (Robinson 2007)
+     and (Whitelaw 2007).
+
+     The origin of modern metrology is usually placed in the 18th century in France, with the
+     introduction of the decimal metric system (1799), replacing the multitude of different units
+     used for local trade. Another key element is of course the industrial revolution of 19th
+     century Europe. The metric system became legal in Great Britain in 1864 and was adopted in
+     Germany in 1868 (although the UK came short of adopting it, partly because of the powerful
+     textile sector, reluctant of the immediate costs). In 1875, the Metre Convention (also known
+     as the Treaty of the Metre) was signed in Paris by representatives of 17 nations and quickly
+     grew to cover more countries (56 member states in 2014) and areas other than weights and
+     measures, such as: electrical standards (1921), photometric standards (1927), ionizing
+     radiation standards (1960s), time standards (1987), chemistry metrology (1993) and, finally,
+     metrology in all scientific areas (1999).
+
+     At the same time, as metrological activities grew in scope and volume, their classification
+     evolved:
+
+
+                                                    9
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+“One institutional aspect of the development of metrology in the 20th century was the
+separation of metrology in many countries into scientific metrology, led by the National
+Metrology Institutes, and practical or legal metrology, administered by weights and measures
+authorities” (Birch 2003).
+
+THE CREATION OF AN INTERNATIONAL NETWORK OF METROLOGY ORGANISATIONS
+
+The 1875 Convention also institutes the BIPM (Bureau International des Poids et Mesures or
+International Bureau of Weights and Measures), designed – after some controversy at the
+time 1 – as an international scientific organisation supported by member states for the
+purpose of carrying out scientific work related to metrology, instruments and units. This was,
+one might observe, a way to maintain metrology for science and metrology for Law and trade
+separate; the latter deserving perhaps more diplomatic attention since it influenced directly
+international trade and relations between member states.
+
+
+
+
+Source: (Howarth and Redgrave 2008)
+
+Legal metrology has evolved to cover the “practice and process of applying statutory and
+regulatory structure and enforcement to metrology” (i.e measurement, units of
+measurement, measuring instruments and methods of measurement (OIML 2011).
+
+
+1
+    Cf. Quinn, 2005 p.2311
+
+                                             10
+                                   OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+The BIPM was created along two other international institutions under the Metre Convention:
+the General Conference on Weights and Measures (Conférence générale des poids et
+mesures, CGPM) and the International Committee for Weights and Measures (Comité
+international des poids et mesures, CIPM). A number of National Metrology Institutes (NMI)
+was established in Europe in the following years. The Physikalisch-Technische Reichsanstalt
+(PTR), created in 1887 in Berlin, was the first national standards laboratory. In 1960, the
+International System of Units (SI system) replaced the original system of the Convention, but
+kept its fundamental units (Metre, Kilogram, Second, Ampere) and adding the Kelvin and the
+Candela.
+
+We have seen that the development of metrology coincided with the emergence of modern
+science: an international network of scientists producing comparable and reproducible
+results, and that a branch of metrology specialised as such. But it is also is closely linked to the
+industrial revolutions of the 19th and 20th centuries and the development of manufacturing
+techniques for mass production. Indeed, as (Quinn and Kovalevsky 2005) put it:
+
+       “The rapid development of manufacturing technology during the first half of the
+       nineteenth century was accompanied by, and in fact could hardly have taken place
+       without, a corresponding development in the design and manufacture of measuring
+       machines, standardization of screw threads and indeed such basic things as
+       engineering flat surfaces and straight edges, all of which are essential for precision
+       manufacturing on a large-scale.”
+
+Aside from everyday life, science and industry, improvements in metrology provided
+important advantages to national and international trade. Aside from accompanying advances
+in production and quality, metrological developments were also historically designed to
+ensure fair trade. Indeed, the State, by safeguarding the quality of measuring instruments and
+the comparability of units, lowered the costs associated with disputes and technical barriers
+to trade (TBT). As we will see, this aspect has expanded to most trade operations and is still a
+critical function of legal metrology today, in the public as in the private sector. After all, trade
+depends on units of mass, length and volume at a fundamental level since their measurement
+determines the price. But the economic benefits of investing in metrology and standards are
+not limited to quantitative precision.
+
+
+
+
+                                                11
+      OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+II)   IDENTIFYING THE ECONOMIC AND SOCIAL BENEFITS OF METROLOGICAL SYSTEMS
+
+
+      FUNDAMENTAL ECONOMIC BENEFITS IN THE LITERATURE
+
+      As we have seen, metrology played a central role in the expansion of mass manufacturing. For
+      many authors, it can thus be considered an essential requirement for an effective division of
+      labour. Indeed, the division of labour depends on formal and informal norms and standards
+      so as to make possible the optimal intervention of multiple agents on the same production
+      chain. (Barber 1987) notes that a lack of widely accepted measurement standards results in
+      higher transaction costs, meaning that companies will do things in-house rather than
+      outsourcing tasks to more efficient specialists, hence losing the benefits of the division of
+      labour.
+
+      The benefits of measurement innovation, combined to legal metrology standards, also show
+      up as an increase in productivity. Various authors cite benefits to productivity stemming from
+      the metrological added value to integrated process control [(Dunn 2005) and (Johnson 2006)],
+      reduced costs of meeting regulation or better decision-making (Swann 2009), p.46-47). But
+      the oldest beneficial effect of improved measurement standards on productivity to have been
+      identified is certainly the production of interchangeable parts. Thomas Jefferson observed
+      this in 1875 when visiting France:
+
+                  “An improvement is made here in the construction of muskets, which it may be
+                  interesting to Congress to know …. It consists in the making every part of them so
+                  exactly alike, that what belongs to any one, may be used for every other musket in the
+                  magazine … I put several together myself, taking pieces at hazard as they came to
+                  hand, and they fitted in the most perfect manner. The advantage of this when arms
+                  need repair are evident. He effects it by tools of his own contrivance, which, at the
+                  same time, abridge the work, so that he thinks he shall be able to furnish the musket
+                  two livres cheaper than the common price”
+
+      By reducing the barriers to entry and representing the interests of producers, consumers and
+      other stakeholders, open standards are also thought to increase competition (Swann 2009).
+      By promoting new entrants and increasing competitive pressure on incumbent companies,
+      metrological standards also foster innovation. As P. Swann also notes, widely accepted
+      metrological standards also help innovative companies prove the benefits of new products by
+      providing recognized standards for consumers to compare to. Indeed:
+
+                  “If the innovator cannot achieve a premium for his innovations, then the economic
+                  incentive for innovation may be lost.” 2
+
+
+
+
+      2
+          Ibid, p. 47
+
+                                                        12
+                                  OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+Many authors have underlined the importance of trust in economic transactions – indeed; the
+entire economic circuit is based on some level of trust between agents. A substantial part of
+that vital element of trade is provided by an international network of certifications and
+standards, in turn relying on metrology organisations and metrological systems. In economic
+terms, metrology – and legal metrology in particular – mitigates the effects of information
+asymmetry. If the seller knows more about the product being sold than does the buyer, the
+lack of trust in the transaction can lead to dramatic market failures, such as honest sellers
+being driven out of the market. This is reminiscent of Gresham’s Law: when the “real” value
+of a commodity shows a significant difference with the value people are required to accept,
+“bad products” will drive out “good products”. This information asymmetry problem was
+famously illustrated in (Akerlof 1970), in an article about lemons on the second-hand car
+market. By ensuring that buyers and sellers both benefit from reliable metrological
+information, as well as requiring that sellers are submitted to relevant standard comparisons,
+legal metrology mitigates that risk. Also, standards can be considered as a form of technology
+infrastructure that enables technology-based growth (Tassey 2000). Improved measurement
+methods for research and development, performance verification, process control, and
+efficiency in market transactions foster innovation and technology diffusion as well.
+
+Investments in metrology and standards also generate spill-over benefits at the firm level,
+such as more effective stock control or the limitation of fraud (Birch 2003). One very
+comprehensive book on the economics of standardization is (Blind 2004). The book provides a
+complete outline of the various types of standards and their possible economic impact. The
+links between standards, technological change, innovation and the regulatory system is also
+explored.
+
+BENEFITS TO INTERNATIONAL TRADE
+
+In today’s globalized trade environment, legal metrology organizes the access to markets and
+provides a level playing field for businesses. Additionally, international compatibility, quality
+or measurement standards promote trade by lowering transaction costs, increasing consumer
+confidence or disseminating knowledge (CIE 2006). But the most prominent benefits legal
+metrology brings to international trade are expressed in terms of access to markets: the
+removal of non-tariff, Technical Barriers to Trade (TBT). It is the task of the OIML to facilitate
+the removal of TBT by harmonizing metrological requirements at the international level
+without hindering the development of free trade. Indeed, as (Kochsiek and Odin 2001) put it:
+
+       “Reliable and comparable measurements play an important role in many cases for the
+       requirements to be met by the products and services (which may be different in the
+       individual states), as do the various approval and test methods laid down by the
+       responsible authorities. But the latter may themselves turn into barriers to trade,
+       defeating the object of the exercise.”
+
+
+
+
+                                               13
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+International and regional organisations concerned with metrology and conformity
+assessment, recognizing the new challenges posed by the rapid globalization of trade, have
+begun cooperation. Most have also published strategy papers on the subject (e.g. the “Blevin
+report” (BIPM 1998) for the Metre Convention and the “Birkeland study” (Birkeland 1998) for
+the OIML). Metrology organisations have cooperation agreements with the main international
+trade organisations, such as the World Trade Organisation (WTO). The WTO “TBT agreement”
+provides advice to metrologists on harmonisation and requires national technical regulations
+to be transparent, justifiable and non-discriminatory. Other cooperation initiatives include
+meetings with the Organisation for Economic Co-operation and Development (OECD) and
+joint workshops on metrology with the United Nations Economic Commission for Europe
+(UN/ECE).
+
+Harmonizing the technical regulations to facilitate world trade is also the role of the BIPM. A
+major advance in the removal of TBT was made in Paris during the 21th CGPM (the General
+Conference of the Metre Convention or Conférence Générale des Poids et Mesures), on
+October 14, 1999 when representatives from 38 national metrology institutes (NMIs) and two
+international organizations signed a Mutual Recognition Arrangement (MRA). The “CIPM
+MRA” – its full title being Mutual recognition of national measurement standards and of
+calibration and measurement certificates issued by national metrology institutes – specifies
+that NMIs can become a part of an international network of metrological bodies producing
+reliable and comparable results either by self-declaration and disclosure of their means and
+methods, or by formal accreditation by competent authorities.
+
+The international network of metrological organisations ensures precision in demonstrating
+conformity to written standards or specifications. Those are often the result of the political
+process of government, even if the border between public and private standards is often
+unclear as many standards are public by law but are based on the work of private standard-
+setting organisations (WTO 2005). Legal metrology thus forms a network connecting
+international organisations, political decision-making at the national level and virtually all
+economic agents. In that sense, legal metrology can be seen as a link between the political
+and economic fields.
+
+This element is also important for it helps economic agents benefit from network effects.
+A network technology is a technology where users benefit not only from its inherent value but
+also from the size of the community of users. Two “laws” of economics illustrate this
+mechanism: Metcalfe’s Law (regarding telecommunication networks) and Reed’s Law (the
+utility of large networks, and specifically social networks, scales exponentially with the size of
+the network). The more widely accepted standards are established for, say, connectivity in
+electronics, telecommunication frequencies or content format such as Blu-Ray discs (JSA
+2005), the more the community of users benefit from those technologies.
+
+
+
+
+                                               14
+                                 OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+QUANTIFYING THE BENEFITS OF LEGAL METROLOGY
+
+In order to design effective tools for assessing the economic benefits of legal metrology, we
+must know exactly where to look. At a basic level, metrology is usually divided into three main
+categories. Scientific metrology maintains and develops accurate standards; Industrial
+metrology cares for measuring instruments used in production and testing processes, as well
+as measurements for quality of life and academic research; finally, Legal metrology ensures
+adequate measurements where they influence the transparency and quality of economic
+transactions. Such situations include instruments subject to specific legal requirements or the
+need for measurement traceability. Indeed, one of the core functions of legal metrology is to
+provide the necessary infrastructure for the traceability of regulated measurements and
+measuring instruments.
+
+Legal metrology provides methods and guidelines for maintaining the material conditions for
+trust and confidence in economic transactions through its international recommendations
+and its compliance and enforcement programmes. In metrological terms, a crucial part of this
+system is referred to as the “traceability chain”: an unbroken chain of comparisons, going
+back to one or more fundamental standards. Such a device requires good communication
+between multiple actors involved in metrological activities: standards-setting, accreditation,
+instrument testing, measurement etc. The traceability chain is established through mutual
+recognition agreements or arrangements (for example the CIPM MRA and the ILAC MRA, the
+arrangement between accreditation laboratories) as well as peer-review.
+
+In order to facilitate conformity to standards and limit uncertainty in measurement results,
+legal metrology organisations use reference procedures. Such procedures are used to
+characterise reference materials or to define reference values. The former are used to
+measure a certain quality in a commodity, as a parameter of its price. Reference quantity
+values serve the purpose of establishing a maximum permissible measurement error. Both
+elements are translated into legal standards for producing and selling, and are thus
+embedded in virtually all value-creating processes. The volume and density of such legal
+metrology standards (or “stock” of standards) are sometimes used as a proxy to assess the
+level of investment of a given region, country, industry or firm in legal metrology and the
+benefits that it entails.
+
+Maintaining a solid and metrological infrastructure, in collaboration with international
+authorities in metrology, and translating this operation in laws for trade, production or safety
+is a process that involves every part of public life. It is thus understandable that quantifying
+the benefits of legal metrology and providing tools readily available to decision-makers for the
+assessment of the benefits of metrology research or investment is not an easy matter. In the
+literature on the economics of measurement, different approaches to calculating the benefits
+of legal metrology have been used or suggested:
+
+
+
+
+                                              15
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+   •   Measuring the added value of government-financed metrology research programmes;
+   •   Using the stock of standards as a proxy for standardization or the activity of
+       metrological institutes;
+   •   Using patents and publications in metrology as a proxy for metrology investment and
+       activity;
+   •   Conducting sectoral case studies to identify industry-specific drivers of growth;
+   •   Using specific guidelines produced by standard-setting organisations to assess the
+       benefits of legal metrology standards.
+
+   Overall, all studies have concluded that there is a clear economic benefit in investing in
+   metrology programmes and national metrology institutes (Kaarls 2003) p.118.
+
+
+
+
+Source: (Howarth and Redgrave 2008)
+
+THE ISO METHODOLOGY
+
+Assessing and communicating the benefits of standardization is paramount for standard-
+setting organisations. The International Standards Organisation (ISO) has published a broad
+methodology to evaluate the impact of standards on value creation (ISO 2010). ISO set up a
+basic framework to represent the value chain in most business-oriented organisations, and
+allow for the identification of where and how standards affect the creation of value.
+
+
+
+
+                                             16
+                                     OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+
+
+Figure 1: Model Value Chain in ISO 2010 p.3
+
+The ISO methodology relies on a “Standard Impact Map”, which “lists the generic impacts
+from standards” by business function in the value chain. Other tools are then used to place
+the organisation in its industry or sector and understand the specific impacts of standards
+that may occur there, as well as to produce a valuation of generic standards in their own
+context.
+
+
+
+
+                                                 17
+       OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+III)   MEASURING THE IMPACT OF LEGAL METROLOGY ON GROWTH
+
+
+       LEGAL METROLOGY, STANDARDS AND INNOVATION
+
+       It is fair to say that achieving a direct and perfect measure of the intensity of legal metrology
+       activity is not possible, for it is too closely intertwined with every economic process. In
+       addition the practice of legal metrology is closely linked to scientific and industrial metrology.
+       As Paul Temple (Temple 2009) puts it:
+
+       “As formal written documents, standards provide codified information regarding measures,
+       reference materials, and processes which frequently support the other functions of
+       standards, e.g. in the provision of legal metrology.”
+
+        Indeed, defining norms and requirements regarding measuring instruments for trade and
+       ensuring that those are followed relies on scientific and industrial metrology. In addition
+       those norms will be highly dependent upon the current industrial standards. Using proxy to
+       estimate the economic impact of legal metrology is however possible. For instance using the
+       budget of the national institutes that are in charge of defining and enforcing those norms can
+       be a relevant strategy to estimate legal metrology’s impact. Evidently it does not account for
+       how adequately this money is spent and its actual contribution to the effectiveness and
+       reliability of legal metrology. Legal metrology involves the same actors as the process of
+       standardization does, and its benefits to the economy and society are of the same nature as
+       those of standardization. Standardization brings benefit to the economy by stimulating
+       innovation and productivity. Legal metrology ensures that those benefits are realised through
+       assessment of conformity to legal requirements derived from standards. Consequently,
+       studying the methods for quantifying the impact of standardization on the economy is a good
+       starting point to estimate the benefits of legal metrology. The stock of standards produced
+       and the amount of publications by national metrology institutes are good proxies for their
+       activity. Ultimately, such measures are used to analyse the benefits of standardization. The
+       next section will present some of the works that have been done to estimate the economic
+       impact of standardization since the same methods can be used to identify the economic
+       benefits of legal metrology.
+
+       Developing and implementing standards as well as investing more in national metrology
+       institutions must be justified by the benefits it entails. Some types of benefits, such as an
+       improvement in quality of life, can be difficult to measure but may be the most central
+       contributions of standards to society. It is delicate to obtain a value properly evaluating the
+       benefits of good air quality or trust and confidence in a business environment, for example.
+       Many studies focus on the benefits of legal metrology at an aggregate level. These studies
+       usually concentrate on the relationship between macroeconomic variables such as the
+       average aggregate labour and capital productivity and the stock of standards or government
+       spending in metrology-related institutions.
+
+
+
+                                                      18
+                                 OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+The main idea behind this type of estimation is that the development of standards and the
+work of national metrology institutes drive innovation and productivity. Increases in
+innovation and productivity can be translated in terms of GDP points since they tend to boost
+production, exports and trade. The “BERL report” for example (Stokes, Dixon et al. 2011),
+states that the development of standards helped achieve an additional 564 million of New
+Zealand dollars in export volume, corresponding to an increase of 0.8 percent of the total
+volume of exports.
+
+The link between legal metrology and innovation is made clear in many publications. The
+product of the work of legal metrology institutes, standards and publications regarding legal
+metrology requirements, can be decisive to innovation activities for various reasons. In the
+Schumpeterian view of progress, there are three key concepts when dealing with
+technological change: invention, innovation and diffusion. Standards play a role in all of these
+mechanisms. First of all, as described in the BERL study, a standard is a vessel for knowledge
+and technology diffusion. The information embodied in a standard can belong to industry
+process optimization, resource use monitoring or product safety best practices. Standards can
+ensure the diffusion of new technologies, new products or new ideas as explained in the “CIE
+study” (CIE 2006) where the authors consider standards as a language:
+
+       “The process of writing a standard — engaging committee members, preparing drafts,
+       coming to consensus (in the approach that Standards Australia uses) is a process of
+       distilling a variety of knowledge and practical experience into a document or set of
+       documents that can be used and understood.”
+
+In order to have a positive effect on economic development B. Verlag (Verlag 2000) states
+that:
+
+       “New products and improved methods of production must quickly assert themselves
+       as broadly as possible”.
+
+In addition to supplying a vessel to diffuse innovation, standards can enable innovation, as P.
+Swann puts it, by helping “create a strong, open, and well-organized technological
+infrastructure that will serve as a foundation for innovation-led growth” (Swann 2000). New
+technologies or new processes can be built on this foundation.
+
+However, when considering legal metrology activity and innovation one must not forget that
+a positive correlation is not obvious. Indeed if we consider legal metrology, many authors
+have remarked upon the fact that standards can also hinder innovation. When observing the
+link between innovation or technological change and metrology, the timing of metrology
+work is paramount: if introduced too early, standards can prevent innovations to enter the
+market. In addition to this timing issue, the number of standards in a certain sector can also
+play against innovation (Stokes, Dixon et al. 2011).
+
+In the 2005 DTI study (DTI 2005), P. Swann focused on the following question: “Do standards
+enable innovation?” Using data from the Community Innovation Survey (CIS), he was able to
+
+                                              19
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+question the informative role of standards and whether they exert a constraint on innovation.
+The PERINORM dataset contains information on the stock of standards, particularly its size
+and its median age. Combining those two datasets, P. Swann used two ordered logit models:
+one estimating the informative role of standards, and one estimating the constraints
+standards put on innovation. If we consider the result about the constraint on innovation, it
+appears that the relationship is non-monotonous: when the number of standards increases,
+producers find them less constraining but after a certain point they become more restrictive.
+It appears to be the same with the age of the standards stock relevant to a specific industry.
+
+Legal metrology and standards can be drivers of technological growth and stimulate GDP, but
+must be meted out carefully so as not to hinder innovative activities and growth. The studies
+linking aggregated variables, such as total factor productivity and a measure of legal
+metrology activity, do not presume of the sign of the relation between those variables, but
+merely observe what emerges from the data. The aim of the following section is to review
+some papers studying the impact of standards at a national level and how the activities of
+national and international standards-setting authorities have an impact on innovation,
+productivity, growth and social welfare.
+
+In the next section, we will review different approaches. Some estimate the link at the
+macroeconomic level between the stock of standards, NMI publications and the aggregate
+average labour productivity. These kinds of studies allow for a monetary evaluation of the
+economic value of standards and of the work of NMIs. We will first consider the studies that
+associate the stock of standards to productivity or directly to GDP. We conclude this section
+by considering studies of the impact of public spending in legal metrology and metrology in
+general.
+
+EMPIRICAL ESTIMATIONS USING THE STOCK OF STANDARDS
+
+From one study to another, the stock of published standards may be used as a proxy for the
+activity of National Metrology Institutes or for the degree of standardization. The advantage
+of this measure is that it is available for an extended period of time. Hence its relation to GDP,
+growth or total factor productivity can be estimated with time series analysis. As we explained
+before, a literature review of this type of study is pertinent when studying legal metrology
+since the economic benefits are similar. In addition, since there is a large number of studies
+on this subject, there seem to be a consensus that time series analysis is relevant to estimate
+the benefits of standardization and the work of metrology institutes.
+
+The study developed by (Jungmittag, Blind et al. 1999) introduces the stock of standards in the
+production function and investigates its effect on the output. A co-integration analysis is used
+for German data from 1961 to 1996. Their results indicate that the stock of standards does
+have an effect on aggregate activity and on economic growth. The DIN study, also using
+German data, finds a positive influence of the stock on standard on innovation and on the
+economy as a whole (Verlag 2000).
+
+
+                                               20
+                                       OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+The DTI study of 2005 reproduces the methodology used by Jungmittag et al. on U.K data,
+from 1948 to 2002 (DTI 2005). This paper associates, with a production function, a set of
+inputs to a measure of standardization and to the output. The inputs used are the ones
+traditionally considered: capital and labour. The authors use a Cobb Douglas production
+function, classically used in growth studies. Technological change acts as a multiplicative
+factor of the traditional inputs:
+
+                                               𝑌𝑌 = 𝐴𝐴(𝑡𝑡)𝐾𝐾 𝛼𝛼 𝐿𝐿𝛽𝛽
+
+Where A(t) is technological change and K and L respectively capital and labour inputs.
+Technological change is a vector of Z(t), a series of factors containing the stock of standards:
+
+                                              𝐴𝐴(𝑡𝑡) = 𝐴𝐴�𝑍𝑍(𝑡𝑡)�
+
+With A defined as a multiplicative factor. Technological change is also a vector of domestic
+innovative activities and the import of technology from abroad. The stock of standards is a
+good measure of the diffusion of innovation.
+
+                             𝑍𝑍(𝑡𝑡) = exp(𝜆𝜆𝜆𝜆) 𝑃𝑃𝑃𝑃𝑃𝑃(𝑡𝑡)𝛾𝛾 𝐿𝐿𝐿𝐿𝐿𝐿(𝑡𝑡)𝛿𝛿 𝑆𝑆𝑆𝑆𝐷𝐷(𝑡𝑡)𝜖𝜖
+
+Where Pat(t) is the stock of domestic patents at time t, Lex(t) is the imports of license and
+STD(t) is the effective stock of standards. If we apply a logarithmic transformation to the
+variables (lower case letters), the production function becomes:
+
+          𝑦𝑦(𝑡𝑡) = 𝑎𝑎 + 𝛼𝛼𝛼𝛼(𝑡𝑡) + 𝛽𝛽𝛽𝛽(𝑡𝑡) + 𝛾𝛾𝛾𝛾𝛾𝛾𝛾𝛾(𝑡𝑡) + 𝛿𝛿𝛿𝛿𝛿𝛿𝛿𝛿(𝑡𝑡) + 𝜖𝜖𝜖𝜖𝜖𝜖𝜖𝜖(𝑡𝑡) + 𝜆𝜆𝜆𝜆 + 𝑢𝑢(𝑡𝑡)
+
+In that study, the estimations with the complete model were considered inadequate due to
+the large number of parameters to estimate. One issue was that standards and patents were
+highly co-linear. Consequently, the authors worked on a reduced form, imposing constant
+return to scale and linking labour productivity to the labour and capital inputs and only the
+stock of standards to model technological change. Here the imposition of constant return to
+scale is 𝛽𝛽 = 1 − 𝛼𝛼. So the model estimated is now:
+
+                   𝑦𝑦(𝑡𝑡) − 𝑙𝑙(𝑡𝑡) = 𝑎𝑎 + 𝛼𝛼�𝑘𝑘(𝑡𝑡) − 𝑙𝑙(𝑡𝑡)� + 𝜖𝜖𝜖𝜖𝜖𝜖𝜖𝜖(𝑡𝑡) + 𝛼𝛼𝛼𝛼 + 𝑢𝑢(𝑡𝑡)
+
+Following this estimation the authors produced a co-integration analysis to see if the relations
+they estimated were spurious. Their results suggest that the stock of standards did influence
+labour productivity, and not the opposite. They found that a one percent increase in the stock
+of standards is associated with a 0.05 % increase in productivity.
+
+This type of study was reproduced in many different countries. Haimowitz and Warren used a
+similar analysis on Canadian data and also obtained a positive relationship between the stock
+of standards and labour productivity (Haimowitz and Warren 2007). Their results are similar to
+those of the DTI study. A 2009 report for AFNOR (Miotti 2009) used this model on French
+data, the difference being that total factor productivity (TFP) was considered instead of labour
+productivity only. The stock of patents is also used in this regression and they find a larger
+
+
+                                                        21
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+effect of the stock of standards. In Australia, the Centre for International Economics (CIE) also
+obtained results suggesting a positive effect of the standards on productivity (CIE 2006).
+
+However, the authors generally mention that these results must be taken with caution since
+the tests applied to the data are imperfect and do not prevent from estimating spurious
+relationships. Spurious relationships can occur for different reasons: missing variables
+affecting both the stock of standards and productivity but unrelated to legal metrology,
+reverse causality problems or simultaneity issues. This study also presents a variation of the
+model used previously where the stocks of standards and R&D constitute the stock of
+knowledge. They use different computation of this stock of knowledge, using these two
+variables. In their second approach, it is the effect of the stock of knowledge on TFP that is
+estimated. It is, as they explain, not equivalent to introducing both the stock of standards and
+R&D in the regression.
+
+The study is reproduced for New Zealand (Stokes, Dixon et al. 2011) and also estimates, with a
+Cobb Douglas production function, the effect of the stock of standards on total factor
+productivity from 1950 to 2011. The estimated impact of an increase of one percent in the
+stock of standards is associated with an increase of 0.10 % in productivity. Finally, in 2013,
+Spencer and Temple produced the same type of analysis but this time only considering the
+British Standards Institution (BSI) catalogue, to examine the role of one particular organization
+on aggregate productivity. They began by estimating an unrestricted VAR model (Vector
+AutoRegressive) and then performed co-integration tests. They also found that standards play
+a significant role in long term productivity growth. One of their important results is that
+standards would not be affected by short term productivity growth, suggesting that for these
+data there are no issues of reverse causality.
+
+These reports surveying the relation between the stock of standards and productivity growth
+present some interesting results. The net advantage of using this type of data and
+methodology is that it provides a sufficient number of points to estimate a satisfactory
+econometric model. However, if the aim is to study the benefits of legal metrology, the stock
+of standards is an imperfect proxy. It can give some indication of the impact of legal
+metrology activities but quantification will necessarily be imperfect since the proxy doesn’t
+entirely covers the benefits of trade regulation based on those standards. Surveys of key
+stakeholders can provide comprehensive results on how legal metrology can benefit the
+economy at large, but estimating an economic impact in term of GDP may be more difficult. It
+is however possible to analyse the benefits of public spending in metrology institutes or by
+focusing on certain metrology programs. The following section presents a selection of such
+studies.
+
+SPENDING IN METROLOGY AND AGGREGATE PRODUCTIVITY
+
+In 1999, the National Measurement System Policy Unit of the Department of Trade and
+Industry commissioned a study on the economic benefits of the National Measurement
+System (NMS) in the U.K. (DTI 1999). We must underline that some of the programs covered
+
+                                               22
+                                 OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+by the National Measurement System are qualified as falling under legal metrology (DTI
+1999). The researchers used survey data but also presented an estimation in GDP terms of
+the benefits associated with metrology as a whole. It found that the UK NMS impacts
+positively the economy through four main channels: by maintaining the measurement
+infrastructure, by supporting innovation, by enabling fair and safe competition and by
+representing the UK in international coordination of the measurement systems. The approach
+used here consists in determining first which proportion of GDP growth can be attributed to
+TFP growth. Then the proportion of TFP growth due to knowledge growth is calculated. Finally
+the proportion of knowledge growth due to metrology inputs is allocated. These successive
+allocations authorises estimates of the contribution of metrology inputs to GDP growth.
+
+In order to realize such allocations, the authors reviewed extensively the relevant literature.
+They estimate that 20 % to 25 % of GDP growth can be allocated to TFP growth. 60 % of
+available knowledge comes from domestic sources and the authors assessed that 10 % of this
+knowledge can be attributed to metrology inputs. The computed estimate of the impact of
+metrology on GDP in the UK is thus, from 1990 to 1998, £5 billion per year (in 1995 prices)
+which amounts to 0.8 % of GDP. Another study on the U.K (NMO 2009) develops a method to
+estimate the impact on the U.K economy of increasing the budget of the National
+Measurement System by 10 %. It is assumed that the purchase of instruments, of technical
+standards and the volume of expert services offered vary proportionately with this budget.
+Using results concerning the elasticity of productivity with the level of innovation and the
+elasticity of innovation to measurement knowledge, an increase of 10 % in the budget of the
+National Measurement System would lead to economic gain between 300 and 400 million of
+pounds. Bowns et al. (2003) analyse the Mapping Measurement Impact model (MMI) of the
+U.K which consists in a method to evaluate the benefits of publicly financed programs. They
+describe and analyse the improvement made to this program which is used by the UK DTI to
+evaluate the project funded as part the British National Measurement System (NMS).
+
+(Poposki, Majcen et al. 2009) develop an original approach by using data on the sales of
+measurement instruments. This paper evaluates whether the countries that have a better
+quality of life, using the Human Development Index (HDI) as a proxy, spend also more on
+measurements. They find a positive correlation between those two variables. Following this
+they put forward descriptive statistics concerning public spending in metrology for a few
+European countries in the form of their NMIs budgets. They analyse these data against the
+national HDI.
+
+
+
+
+                                              23
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+
+
+Figure 2 Relative NMIs spending compared with quality of life indicators. Source: (Poposki,
+Majcen et al. 2009).
+
+The authors proceed to use the internationally recognized calibration and measurement
+capabilities (CMC), defined by the Mutual Recognition Arrangement, of each National
+Metrology Institute estimating that they constitute a better proxy for public spending in
+metrology. They stipulate that it is still an imperfect measure of public spending since the
+costs of maintaining a number of CMC may vary from one CMC to another. More investment
+in R&D in metrology is associated with higher HDI. These authors explain that the evaluation
+of the benefits one can expect from spending in metrology will probably increase in the
+following year since the social demand for government accountability is increasing.
+
+This demand for more evaluation of the benefits associated with spending is illustrated by the
+European Metrology Research Programme (EMRP) set up by EURAMET, the association of
+European NMIs. Indeed, there is a greater demand for ex-ante and ex-post evaluation of the
+benefits associated with the allocation of money between different projects in order to
+prioritize and ultimately guide the allocation of public funds.
+
+
+
+
+                                             24
+                                          OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+IV)   GUIDELINES FOR AN ECONOMETRIC ANALYSIS AT THE MACRO LEVEL:
+
+      There are a number of macroeconomic studies putting forward a model for estimating the
+      impact of standards on productivity and growth. Here, we will present a simple version of the
+      macroeconomic model and its possible extensions depending on the data available.
+
+      To perform this type of estimation we either need data from a large number of countries or
+      time series for at least one country. The model is usually designed for a single country and
+      estimated for a period between ten and sixty years. The objective here is to explain a
+      macroeconomic aggregate (productivity, growth, added value) with explanatory variables that
+      include an acceptable proxy for legal metrology in order to quantify the impact of this factor.
+      To properly identify this impact, control variables have to be included in the model: namely
+      the national stock of capital and the amount of labour put in the production. The basic
+      version of the model is given by:
+
+                                  𝑦𝑦(𝑡𝑡) = 𝛾𝛾 + 𝛼𝛼𝛼𝛼(𝑡𝑡) + 𝛽𝛽𝛽𝛽(𝑡𝑡) + 𝛿𝛿𝛿𝛿𝛿𝛿(𝑡𝑡) + 𝜖𝜖
+
+      Where 𝑘𝑘 is the stock of capital at time 𝑡𝑡, 𝑙𝑙 the stock of labour at time 𝑡𝑡 and 𝐿𝐿𝐿𝐿(𝑡𝑡)a proxy for
+      legal metrology at the same time.
+
+      The first methodological choice to consider is the explained variable. It depends on what we
+      seek to know: do we want to quantify an impact on total factor productivity, on labour or
+      capital productivity, on sectorial growth, on national growth, on global growth, on social
+      welfare (using the HDI index, for example)? To choose this variable, the scale at which the
+      analysis is realized must be decided: a sector, a country, a group of countries etc. In most
+      studies, productivity is examined at a national level (TFP or labour productivity).
+
+      The second methodological choice is the proxy for legal metrology. The most widely used is
+      some variation of the stock of standards, although it is imperfect in a number of ways (see
+      beginning of Section III). However this variable presents different advantages: it is easy to
+      compute because different organizations keep track of this stock. Besides, it is often available
+      for long periods of time. An alternative is to use the number of publications of metrological
+      institutes in addition to this stock. Another interesting variable concerning legal metrology
+      would be the national budget of metrological institutes or the public spending on that matter.
+      We can also use the certification cost for industries (Usuda and Henson 2012) along with the
+      precedent proxies. However this operation should be done with caution to avoid any possible
+      omitted variable bias. Such bias occurs when factors influence both the explained variable
+      and at least one explanatory variable. So, when adding public spending in metrology, one
+      must be sure that it is not correlated with an omitted variable that would affect the explained
+      variable (i.e. productivity or output).
+
+      The missing variable bias is an inherent problem to this kind of estimation and it is very likely
+      that the model with only the stock of standards also suffers from it. Indeed it is very likely that
+      the stock of standard and the explained variable are both strongly correlated to innovation
+
+
+                                                          25
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+and technological change. Proxies for innovation should thus be added in the model and
+many authors do so (cf. part III). The estimated equation becomes:
+
+                    𝑦𝑦(𝑡𝑡) = 𝛾𝛾 + 𝛼𝛼𝛼𝛼(𝑡𝑡) + 𝛽𝛽𝛽𝛽(𝑡𝑡) + 𝛿𝛿𝛿𝛿𝛿𝛿(𝑡𝑡) + 𝜙𝜙𝜙𝜙𝜙𝜙𝜙𝜙ℎ(𝑡𝑡) + 𝜖𝜖
+
+Where 𝑇𝑇𝑇𝑇𝑇𝑇ℎ(𝑡𝑡) is a proxy for technological progress at time 𝑡𝑡. Such proxies can include the
+stock of domestic or imported patents, spending in R&D, performances in research and
+education etc.
+
+The model can be extended for more than one country, as done in (Temple, Blind et al. 2005).
+Estimating the model for multiple countries allows for the introduction of country-fixed
+effects coefficients. Including those reduces the omitted variable bias since they control for
+unobserved effects constant over time. For 𝑛𝑛 countries, the model is now:
+
+                 𝑦𝑦𝑖𝑖 (𝑡𝑡) = 𝜇𝜇𝑖𝑖 + 𝛼𝛼𝑘𝑘𝑖𝑖 (𝑡𝑡) + 𝛽𝛽𝑙𝑙𝑖𝑖 (𝑡𝑡) + 𝛿𝛿𝛿𝛿𝑀𝑀𝑖𝑖 (𝑡𝑡) + 𝜙𝜙𝜙𝜙𝜙𝜙𝜙𝜙ℎ𝑖𝑖 (𝑡𝑡) + 𝜖𝜖𝑖𝑖
+
+Where 𝑖𝑖 indicates the country.
+
+Once estimated, the model could be a useful addition to the toolbox already available to
+researchers and decision makers who seek to assess the impact of legal metrology on the
+economy and society. The estimated coefficient 𝛿𝛿 represents the effect, all things being
+equal, of legal metrology on the national product.
+
+
+
+
+                                                          26
+                                       OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+V)   LESSONS LEARNED FROM SECTORIAL CASE STUDIES
+
+     In order to better apprehend the benefits of legal metrology, the next section analyses the
+     microeconomic foundations of the models explained before. More specifically, we will
+     describe the benefits of metrology and standardisation for microeconomic actors by focusing
+     on sectorial studies and theoretical microeconomic analyses of standardisation impact. The
+     scope is twofold: after summarising the main benefits from the producers’ point of view, we
+     will point out the gains for consumers mentioned in the literature. More often, the sectorial
+     studies on that topic do not give any numerical estimation of the benefits of legal metrology
+     or standardisation at large. Indeed, this estimation is not easy to produce because of the lack
+     of a counter-factual. Even though, the authors provide a fairly exhaustive list of these
+     advantages and explain the underlying mechanisms behind the link between metrology, and
+     its translation into legal requirements, and welfare.
+
+
+
+     BENEFITS FOR PRODUCERS
+
+
+     TRANSACTION COSTS REDUCTION
+
+     Transaction costs refer to the costs incurred when making an economic transaction. They also
+     refer to the price agents need to pay in order to enter a market. These costs can incur at each
+     step of the transaction: before the transaction, search and information costs refer to the costs
+     of looking for a potential buyer for second-hand goods, for instance. During the transaction,
+     bargaining costs relate to the costs of establishing a contract and making the transaction
+     happen (for example, transportation of the goods). After the transaction, policing and
+     enforcement costs refer to all the costs of verifying that every Party comply with the contract.
+
+     Businesses have to minimize such costs when working together. They must find a contract in
+     their best interest and make sure everything takes place according to the terms defined
+     beforehand. Even if the contract builds a legal obligation, one cannot be certain of the other
+     Parties’ behaviour. This uncertainty is a market failure in the extent that uncertainty often
+     leads to an equilibrium different from the economic optimum. For example we can imagine
+     two economic agents willing to make a deal but deciding not to in order to prevent
+     themselves from a risk of non-compliance.
+
+     The Case study led by BERL Economics (Stokes, Dixon et al. 2011) is a good example of how
+     standards can help mitigate this risk and the associated costs. The study concentrates on the
+     building construction sector in New Zealand. Interviews with the main stakeholders of the
+     industry were undertaken to assess the role of standard, in reducing cost and uncertainty.
+     There is a wide range of standards in this industry ranging from process specifications to
+     performance requirements. These standards can be either mandatory or voluntary. The
+     revision of one of these standards (NZS 3910:2003) included provisions for “the clear
+     identification of risk allocation, assurance of fair treatment for the contractor and the principal
+
+
+                                                     27
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+and clearer insurance requirements”. Indeed, stakeholders in the building sector face a high
+uncertainty; the Principal could suffer from the delay in the execution of the project. At the
+same time, the contractor could suffer from an environmental or climate risk and could not
+be held responsible for the delay. The standards make clear who has to carry the risk:
+
+       “The key things the Standards does is that it says, once the project starts most things
+       that happen are at the contractor’s risk. They are on-site and know the business of
+       construction, so a Standard like that passes the care of the works to the contractor but
+       it can’t pass all that risk as there are certain things that the principal must carry – the
+       accepted risks – things like the design works, decisions that have been made about the
+       materials that will be used. The principal carries this risk as they made that decision.
+       These risks also include things that the contractor can’t take out insurance to protect
+       themselves from. Those care of the works provisions are a large part of the Standard.”
+
+(Interview quote from Andrew Bricknell, Director of Project Management Asia-Pacific, MWH)
+
+Additionally, the standards not only focus on the aspect of responsibility but are also
+“solution-driven” in the extent that they disseminate expectations on payment delivery and
+timing and suggest solutions in the case of non-compliance with the contract.
+
+Standards also lead to a reduction of searching costs, which can occur at all stages of the
+transaction: they represent the cost of finding a contractor and verifying he is acting
+accordingly to the contract. (Den Butter and Groot 2007) describe mechanisms by which
+standards reduce transaction costs. Without any specification of product, the search for a
+good seller would take a lot of time. Besides, the contract would have to describe every
+characteristics of the traded good or service without being able to refer to any known
+category. Standards thus allow focusing only on the price and delivery conditions during the
+information search but also during the contract redaction. This leads to an important
+decrease in transaction costs. Butter et. al. illustrate this standard benefit with an example in
+the automobile industry:
+
+       “After standards were introduced, it was no longer necessary to search for a supplier
+       that could produce the parts that were needed in a specific situation. Search costs
+       decreased and using external suppliers became more profitable. Apart from search
+       costs, contracting costs were also reduced. Contracts between the producer and its
+       suppliers did no longer have to be specified extensively. Clearly this also reduced
+       enforcement costs.”
+
+PRODUCTIVITY INCREASE
+
+In a 2009 study, Swann (Swann 2009) explains how a better knowledge of raw products
+induced by legal metrology requirements and standardisation lead to cost reduction and
+increased productivity. A case study of Plasterboard production in the UK shows how
+standards can enhance the production process. Plasterboard is produced from paper and
+
+
+                                               28
+                                      OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+gypsum. A good measurement of the raw materials and of the intermediate products allows
+adjusting the production process. This is all the more important than a lot of quality variation
+in the final product can be attributed to quality variation in the raw product (and the variation
+in quality intensifies for natural products). Standards and automatic measurement lead to an
+increase in the accuracy of quality test.
+
+Before the implementation of standards, a sample of the raw material was taken and tested
+for characteristics. Now each piece entering the production process is automatically tested so
+that the quality of the product is known at every step of the process. This way, the production
+process can be adjusted in order to prevent from a variation in the quality of the final
+product. This improvement in measurement-related procedures and processes led to a better
+quality of the final product but also to a more accurate description. This example thus shows
+how investing in measurement capacities reduces the market failure induced by information
+asymmetries.
+
+Another source of uncertainty encountered by economic agents is environmental by nature.
+Environmental uncertainty refers to all the unknowns about environmental parameters that
+could influence profit. For instance, a wheat producer faces uncertainty concerning the future
+demand for his product in the next few months, but also regarding the climatic conditions on
+which his final supply depends. This kind of uncertainty leads to specific costs (insurance costs
+for example), a decrease in productivity and a less efficient stock management.
+Environmental risk often refers to this latest sense. Firms facing high environmental risks may
+invest in an effective way to mitigate it, and legal metrology is key to that operation.
+
+In a study for the Canadian standards-setting organisation (Haimowitz and Warren 2007), the
+authors complete their econometric study with a case study of SaskPower, a full-service
+Canadian utility. SaskPower registered to ISO 14001 3, a set of environmental standards.
+According to SaskPower, standards adoption led to risk management benefits:
+
+        “Overall, SaskPower believes that it is operating more efficiently as a result of
+        implementing ISO 14001. These efficiencies have allowed SaskPower to do more things
+        with the same resources and to do other things more diligently.”
+
+The standards aim to reduce the environmental impact of the firm; they did not directly affect
+the measurement system as in the Plasterboard case. The mechanism to explain how the firm
+benefits from these standards is different: because the ISO registration implied limiting some
+production spill overs that could affect external parameters which determine total profits, the
+standards adoption resulted in higher productivity and a better adaptation to the company’s
+
+
+
+3
+ « The ISO 14000 family addresses various aspects of environmental management. It provides practical tools
+for companies and organizations looking to identify and control their environmental impact and constantly
+improve their environmental performance. ISO 14001:2004 and ISO 14004:2004 focus on environmental
+management systems. The other standards in the family focus on specific environmental aspects such as life
+cycle analysis, communication and auditing. » http://www.iso.org/iso/iso14000
+
+                                                     29
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+environment. The impact of standards on these productivity gains are very difficult to
+quantify because the factors are numerous and highly correlated. One should be careful when
+assessing the isolated impact of standard adoption. This quantitative pitfall can be avoided by
+qualitative examination (e.g. interviewing people involved in the standard adoption process):
+
+       “In 2005, the most recent year for which data are available, SaskPower had 15
+       reportable spills, which was slightly under the 5-year average. One might ask two
+       questions: Was the result significantly positive[…] The decrease is probably indicative of
+       a positive result because over the previous 5 years, SaskPower had added facilities and
+       increased the number of employees all items which could be expected to increase the
+       potential for spills. […] SaskPower is convinced that ISO 14001 implementation has
+       definitely helped it to manage and avoid environmental risks. SaskPower believes that
+       it has benefited significantly by implementing ISO 14001. Management has increased
+       confidence that through the rigor of ISO 14001 and the discipline imposed around the
+       identification of negative consequences, environmental risks are being identified and
+       better managed. Risks have always been managed at SaskPower […] but since ISO
+       14001 was implemented procedures have been improved, quality training is in place,
+       and documentation and record keeping is better.”
+
+By registering to the ISO standards set, SaskPower also improved its audit system. ISO 14001
+includes requirements to define and communicate targets. The audit process has been
+designed such as each negative result is followed by a procedure aiming at fixing the
+malfunctions. This way, the company in the study was able to constantly improve its
+production processes and its productivity.
+
+ACCESS TO NEW MARKETS
+
+An important benefit of standards mentioned in the literature is the opportunity to access
+new markets. This can be done either by productivity gains allowing producers to take part in
+a very competitive market or through the compliance to legal requirements necessary to
+enter the market. In the same survey (Haimowitz and Warren 2007), the authors study the
+case of INFASCO, a producer of standard steel fasteners playing a front role on the global
+market. The conclusion of the authors is clear: the registration to ISO 9001 and ISO/IEC 17025
+accreditation enabled the firm to stay in business despite the highly competitive environment
+implied by the presence of low-cost fasteners from emerging market countries.
+
+The example of the Building sector in New Zealand reviewed by (Stokes, Dixon et al. 2011)
+shows how investing in standards can help firms gain an interesting position in a particular
+market. In this example, the national programme “Warm up New Zealand” produced benefits
+for consumers using the insulation system:
+
+       “Anyone who has a home built before 2000 is eligible for 33 percent off the cost of
+       installing ceiling and under floor insulation up to a maximum of $1,300. Community
+       Service cardholders can get 60 percent off the cost of installing insulation.”
+
+                                               30
+                                   OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+To be eligible, consumers have to choose a specific insulation system complying with a set of
+requirements defined by the Energy Efficiency and Conservation Authority. Building
+companies offering equipment and installations fitting with these requirements thus have a
+profitable position in the market since the demand for their goods and services increases. In
+this particular case, the first company offering this insulation system has a quasi-monopolistic
+position. To be able to sell this system at the time when the programme is implemented is
+possible only if the companies invest in legal standards and even take part in the drafting
+process at an early stage as consulted stakeholders.
+
+Indeed, participation in standard design enables firms to achieve a good market position. In
+(Shintaku, Ogawa et al. 2006), the authors focus on the electronics sector. The International
+Electrotechnical Commission 4 gathers experts to discuss and develop new standards. To
+explain how standard participation increase market share, the case of Tyco Electronics/AMP is
+studied. This company produces connectors and interconnection systems. When deciding to
+produce a new type of connector, firm representatives also joined the committees designing
+the relevant standards. The idea was to influence the process to their advantage by
+convincing other stakeholders of the superiority of their technology. Eventually, the new
+connector was used to set the standard, giving Tyco Electronics/AMP a significant competitive
+advantage on the markets they were operating in. Because this connector used a more
+elaborated technology, the profit margin of the company also increased due to higher prices.
+The authors quantified the gain induced by this new market share with the following results:
+
+          “[…] in the period 1995-2004, the combination of better market share and better profit
+          margins has provided Tyco/AMP with additional profits estimated to be in-between
+          US$ 50 000 000 and US$ 100 000 000. Without the investment in standardization this
+          probably would not have been feasible”.
+
+Another case study by the same authors shows that, even if the company is not participating
+in the standard-setting process, it can benefit from staying informed of the latest modification
+in the legal metrology requirements or certification process. Intergraph produced software
+and hardware goods. They conceived a computer for graphical applications and the keyboard
+did not meet the international standard IEC 60073. Before the beginning of the keyboard
+modification (which would have induced a cost of €19000 for only 1000 keyboards), a
+member of the committee organization heard that the standards stopping them from
+commercializing the product were being changed in a way allowing them to sell the
+computers as they were. Being informed of this new element too late would have incurred
+huge costs for the firm. In sectors such as Information Technology, standards evolve very
+quickly and have a large impact on the company profits because network and spill overs
+effects are omnipresent. It is then essential for firms to invest in standardisation, either by
+taking a decisional part in it or by staying informed of the latest developments.
+
+
+
+4
+    http://www.iec.ch/
+
+                                                31
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+We have seen how investing in and taking part legal metrology work can enable firms to
+access new markets or keep the upper hand when legal requirements change. We will now
+describe how standardisation can enable firms to create new markets in which they will have,
+at least in the early stages of its development, a monopolistic position. Indeed, as (Swann
+2000) shows, standards play an essential role in product diversity. Above, we have highlighted
+the role of standards in fostering innovation. Swann builds a model to explain the impact of
+standard on process innovation. The author uses a characteristic analysis in which products
+are differentiated by the features they offer. Innovation leads to the development and
+commercialization of new characteristics and then allows for an increase in diversity. Every
+product can be located in a multidimensional space according to its characteristics. It is
+important that consumers understand the location of products within this virtual space. Yet
+this is only possible if sellers can provide accurate measurement about the product
+characteristic. The model shows that “anything that expands the pool of feasible
+measurements can be expected to expand the pool of feasible product characteristics”.
+A main hypothesis of the model is that product innovation demonstrates “combinatorial
+characters” in the sense that a new product is a new combination of feasible measurable
+characteristics.
+
+INFORMATION, QUALITY AND PRICE PREMIUM
+
+We have mentioned before the role of asymmetric information in market failures. We will
+now describe the nature of this market failure and explain how measurement standards can
+help reduce it. In his famous article (Akerlof 1970), Akerlof illustrates adverse selection with
+the example of second-hand cars. In this market, suppliers are car owners who try to sell their
+cars. Buyers are looking for a car but they are facing a risk induced by the lack of information
+about the quality of the car offered. The buyers face the risk of buying a defective car. Taking
+this risk into account, they lower their reservation price (i.e. the maximum price they are
+willing to pay for their second-hand car). Sellers of high quality cars are not interested in
+selling anymore with too low a price and are driven out of the market. Only sellers of low
+quality cars remain: this phenomenon is referred to as adverse selection.
+
+Asymmetric information leads to market failure in the extent that some buyers were able to
+buy a high quality car for a higher price but the transaction does not occur because of this
+lack of information on the buyers’ part. This means that the satisfaction of buyers and sellers
+would have been higher if the information was perfect. Asymmetric information is a widely
+studied research topic in economics and measurement standards appear to be an effective
+answer to this market failure. This is the proposition put forward by (Swann 2009). According
+to the author, measurement standards do not only achieve market failure reduction but also
+allow firms to receive a price premium when they produce better quality goods. This
+mechanism leads to a higher average quality of the products offered. As we explained before,
+these kinds of standards allow producers to commercialize new products or better quality
+products. This investment in research and this improvement in quality are costly for the
+
+
+                                              32
+                                    OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+producer, who is incentivised to do so only if he expects his new product to meet a
+substantial demand.
+
+Consumers who are offered innovative goods know they are taking a risk by buying: it may
+not be compatible with other, related goods (in the case of telecommunications, furniture or
+appliances, for instance); understanding all his functionalities may induce an information cost
+or it may simply not match the consumer’s taste since the good is new on the market and has
+few recommendations from peers. It is then essential for producers to reduce the risk faced
+by consumers buying their commodities. An efficient way to mitigate this is to provide the
+consumers with more information about the product. Once the information about the
+innovative product is disseminated, consumers may agree to pay a higher price for a higher
+quality good; the producer receive a premium existing only as long as information is easily
+available thanks to standard measurements.
+
+So far we have examined the benefits of norms and measurement standards from the
+producer’s point of view. We will now complete this analysis with a review of the
+consequences for consumers.
+
+BENEFITS FOR CONSUMERS
+
+
+INFORMATION, QUALITY ASSURANCE, NEW PRODUCTS
+
+As we have seen before, legal metrology increases the amount of information available about
+commercialized products. In turn, more accurate information facilitates innovation. Producers
+can enter new markets or even create one where they may have a monopolistic position for a
+time. This increase in the variety of available goods also improves consumers’ welfare. They
+are more likely to find a product matching their taste and expectations, which augments their
+utility. Here, we use the term “utility” in the sense given to it by the consumer choice theory.
+Here is the simplest way to represent the utility associated with the purchase of a good 𝑖𝑖:
+
+                                            𝑈𝑈𝑖𝑖 = 𝑓𝑓(𝑥𝑥𝑖𝑖 , 𝑝𝑝𝑖𝑖 )
+
+With 𝑥𝑥𝑖𝑖 the quality of the good 𝑖𝑖 or any of its characteristic and the 𝑝𝑝𝑖𝑖 the price of good 𝑖𝑖. The
+function f is increasing in 𝑥𝑥𝑖𝑖 and decreasing in 𝑝𝑝𝑖𝑖 . It is also often assumed that utility is
+increasing in the quality. Innovation would result in the production of a product with higher
+quality or more features. Consumers will benefits from an increase in goods quality since
+good quality is one of the main parameters determining their utility. The Dixit-Stiglitz model
+(Dixit and Stiglitz 1977) of “love of variety” shows that consumer utility increases with enough
+diversity of choice. The main hypothesis of this model is that products are horizontally
+differentiated, meaning that they differ in their characteristics – which all consumers are
+informed of.
+
+In short, the hypothesis of perfect information about the products available on the market is
+essential to microeconomic models. According to these models, consumer utility and welfare
+
+
+                                                     33
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+increase with the quality and diversity of products. As we have seen earlier, the
+implementation of measurement standards and legal metrology requirements enable firms to
+produce higher-quality goods and to commercialise new products. But for legal metrology to
+increase total welfare, these standards and information about measurement rules and
+instruments have to be available to consumers. In (Swann 2009), the author stresses this
+point. He cites the work of (Bacharach 1990) who explains that even if economic studies
+explain product characteristic as defined by producers and sellers, it is useful to adopt a
+“customer-centred” view. According to P. Swann:
+
+       “this customer-centred view makes it clear why measurement methods should be open
+       to sellers and buyers alike”.
+
+Investing time and money in in legal metrology and measurement may then benefit the entire
+sector and the whole economy as long as the information about measured characteristic is
+known to all economic agents. This is why private and public investment in legal metrology
+enterprises are equally important to ensure economic growth and welfare.
+
+SPILL OVER EFFECTS AND NETWORK EXTERNALITIES
+
+There are other non-direct benefits of legal metrology and standards to consumers. In
+sectors characterized by high network or spill over effects, metrological requirements can
+have an even more important effect on total welfare. The study of the Building Sector in New
+Zealand (Stokes, Dixon et al. 2011) shows that the increase in the quality of installations and
+insulation system also benefits households living in residential buildings. Furthermore, as the
+people installing this insulation scheme increase, the quality of the service offered by the
+building companies increase too:
+
+       “Between July 2009 and March 2011, 91,506 households have taken advantage of the
+       home insulation and heating scheme. At least 10 percent of these households have
+       been audited. There has been a huge increase in the quality of the installation of the
+       insulation due to training by the Insulation Association of New Zealand related to NZS
+       4246:2006.”Quote from Tim Mahar, Senior Technical Advisor, Energy Efficiency and
+       Conservation Authority
+
+IMPACT OF MEASUREMENT METHODOLOGY
+
+One important aspect of measurement that can benefit both consumers and producers is the
+methodology it uses. Indeed, as we have seen in the case study of the plasterboard sector,
+comprehensive and integrated measurements on the raw materials help to improve the
+production process and thus increase the final product quality. This increase in quality
+benefits producers and consumers alike if the product price is not too high. The possibility of
+a price too high for the supply to meet its demand is reduced by the increase in efficiency (as
+economic theory presents prices as highly correlated with productivity) made possible by
+standardisation. For some sectors, it is not possible to measure the characteristics of every
+
+                                              34
+                                       OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+      single input: this is why the sample methodology is an important component of the firm’s
+      measurement strategy.
+
+      In (CIE 2006) the authors study sampling methods in the mining sector. When a transaction
+      for selling minerals occurs, estimations about the mineral content have to be made in order
+      to determine the price and quantity to be sold. It would be too costly to measure the content
+      of each mineral, so only a sample of mineral is selected to be tested. The way this sample is
+      chosen will determine the accuracy of the estimation. Producers have to choose the right
+      statistical strategy since more accurate sampling would allow the seller to negotiate a higher
+      price than otherwise. For the buyer, this would reduce the information asymmetry he faces in
+      these kinds of transactions. The authors focus next on the gains in terms of profits for the
+      producer when the supply increases. Their model depends on an estimation of supply and
+      demand responsiveness (represented by the slope of the curve in figure 1). They estimate an
+      average benefit of $58 million per year for the concerned industries.
+
+
+
+
+      Source: (CIE 2006)
+
+
+
+
+VI)   MODELLING THE MICROECONOMIC IMPACT OF MEASUREMENT
+
+      We will now build a model for quantifying the impact of measurement on the producers’
+      profits. Because we want to focus on the benefits conformity to legal metrology requirements
+      brings to the profit of producers, we won’t include the costs induced by standard adoption or
+      measurement investment at every step of the modelling. Instead we included a parameter for
+      the cost of the whole operation of following legal metrology requirements. This model aims
+      to explain profit by the factors most commonly used, as underlined in the literature review.
+      Our methodology is inspired by producer microeconomic theory, which defines the
+      maximisation program for producers as follows:
+
+
+                                                   35
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+                                    𝑀𝑀𝑀𝑀𝑀𝑀𝑥𝑥          Π = 𝑝𝑝. 𝑦𝑦 − 𝐶𝐶(𝑥𝑥)
+                             �
+                                  𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠 𝑡𝑡𝑡𝑡    𝑦𝑦 = 𝐹𝐹(𝑥𝑥)
+With Π the profit; 𝑝𝑝 the price of a good noted𝑦𝑦; 𝐹𝐹(. ) the production function and 𝐶𝐶(. ) the
+cost function. This very simple representation helps to understand producer strategies. On
+the one hand, he wants to produce more because his profit is an increasing function of the
+quantity sold. On the other hand the cost is an increasing function of the quantity produced
+(second part of the equation). Under some hypothesis on the functional form of F(.) and C(.),
+this profit function presents a maximum defining the optimal amount of input to use which
+then defines the optimal produced quantity.
+
+If we include the constraint into the objective function, we obtain this program:
+
+                              𝑀𝑀𝑀𝑀𝑀𝑀𝑥𝑥     Π = 𝑝𝑝. 𝐹𝐹(𝑥𝑥) − 𝐶𝐶(𝑥𝑥)
+The mechanisms explaining the link between standard adoption, measurement improvement
+and profit increase have been listed before. We will include them in the production and cost
+functions step by step in order to get a comprehensive model embodying the economic
+effects of legal metrology and standardisation on producers’ profits. Here, the cost function
+includes the costs induced by the production of the goods as well as all the other costs
+producers face during the sale proceeding. This approach is slightly different from the
+standard microeconomic framework where, in a perfect competition environment, there are
+no transaction costs and the price is the only adjustment mechanism between supply and
+demand.
+
+This simple model will allow us to make a first step in trying to quantify the impact of legal
+metrology on profit. As we have explained before, the absence of a counterfactual prevents
+us from computing the benefits of legal metrology in monetary units. Yet, we can still
+translate how legal metrology work affects profit into a microeconomic model.
+
+
+
+
+TRANSACTION COSTS
+
+One of the essential benefits provided by standards and measurement is the decrease in costs
+incurred by firms. As we have explained, standards can reduce transaction costs by various
+means. For instance the input 𝑥𝑥 needed to produce the good 𝑦𝑦 can be provided by an
+external supplier. In this case, the producer might need to establish a contract to schedule a
+weekly delivery, for instance. The producer then faces what we have called policing and
+enforcement costs to make sure the supplier behaves according to the contract. There are
+different ways to include these costs in the profit function. We assume that policing and
+enforcement costs can be proportionate to the quantity of inputs to be acquired by the
+producer. For these situations, we can elaborate a factor 𝑡𝑡1 strictly positive and multiply it by
+the quantity of goods 𝑥𝑥. This parameter encapsulates all the variable costs, increasing with
+the quantity produced. Thus, the cost function becomes:
+
+                                                 36
+                                     OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+
+                                             𝐶𝐶(𝑥𝑥) = 𝑡𝑡1 . 𝑥𝑥
+
+Search and information costs as well as bargaining costs are conditional to the transaction
+and they don’t necessarily increase with the quantity traded. They can be included in the cost
+function as a fixed cost, which means adding an additive factor to the cost function:
+
+                                          𝐶𝐶(𝑥𝑥) = 𝑡𝑡1 . 𝑥𝑥 + 𝑡𝑡2
+
+According to the standard industrial economy, in the short run, the only variable producers
+can choose is the quantity 𝑥𝑥 used to produce the output 𝑦𝑦. However, in the long run,
+producers can choose the technology they use (ie. modifying the production function). For
+example, investing in a new machine improves the technology by modifying the labour/capital
+ratio of their production. As we have seen before, the adoption of a new standard can reduce
+transaction costs. Consequently 𝑡𝑡1 or 𝑡𝑡2 could decrease to 𝑡𝑡1′ and 𝑡𝑡2′ with 𝑡𝑡1′ < 𝑡𝑡1 and 𝑡𝑡2′ < 𝑡𝑡2 .
+Since profit is decreasing with cost, this would increase profit.
+
+                 Π ′ = 𝑝𝑝. 𝐹𝐹(𝑥𝑥) − 𝑡𝑡1′ . 𝑥𝑥 − 𝑡𝑡2′ > Π = 𝑝𝑝. 𝐹𝐹(𝑥𝑥) − 𝑡𝑡1 . 𝑥𝑥 − 𝑡𝑡2
+Besides, investment and participation in legal metrology processes from standard-setting to
+verification is a good way to avoid future costs. If the firm’s technology anticipates the norm,
+this firm won’t have to incur additional costs to comply with the standard. In the producer
+maximisation program, this has to be included in future profits and again in the inter-
+temporal profit function that we will develop in the following section.
+
+
+
+
+                                                    37
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+PRODUCTIVITY INCREASE
+
+
+THE PRODUCTION FUNCTION
+
+We have explained the mechanisms by which standards can improve productivity. In the
+Plasterboard case study (Swann 2009), a better knowledge of raw product quality led to a
+more adequate use of the production process. To take this into account in our maximisation
+program, we assume that producers can now chose the production function 𝐹𝐹(. ) by deciding
+to adopt a standard or to buy more accurate equipment.
+
+Now about the details of the production function. The economic literature uses a production
+function to model the transformation of inputs into outputs. The more general form is simply
+given by:
+
+                                       𝑦𝑦 = 𝑓𝑓(𝑥𝑥1 , 𝑥𝑥2 , … , 𝑥𝑥𝑛𝑛 )
+
+Where 𝑥𝑥1 , 𝑥𝑥2 , … , 𝑥𝑥𝑛𝑛 are the different input quantities used. The production function gives the
+maximum production level obtained by the different combinations of production factors, with
+a given technology. Usually, two main kinds of inputs are considered: labour (𝐿𝐿) and capital
+(𝐾𝐾) and then
+
+                                             𝑦𝑦 = 𝑓𝑓(𝐿𝐿, 𝐾𝐾)
+
+
+
+Usually in economics, the production function is defined as a Cobb-Douglas function and
+takes the following form:
+
+                                             𝑦𝑦 = 𝐴𝐴𝐾𝐾 𝛼𝛼 𝐿𝐿𝛽𝛽
+
+Where A is a technology parameter, 𝛼𝛼 and 𝛽𝛽 are parameters for, respectively, capital and
+labour productivity. Their relation to one indicates the form of the returns to scale.
+
+      If 𝛼𝛼 + 𝛽𝛽 = 1, returns to scale are constant,
+
+      If 𝛼𝛼 + 𝛽𝛽 > 1, returns to scale are increasing,
+
+      If 𝛼𝛼 + 𝛽𝛽 < 1, returns to scale are decreasing.
+
+
+
+
+                                                    38
+                                                OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+        STANDARDS AND PRODUCTIVITY
+
+        In the examples we have described above, an improvement in measurement (due to
+        standards or investment) means better inputs use (e.g. capital) meaning in turn that 𝛼𝛼
+        increases. Similarly, standards adoption can improve labour quality (as it may be the case with
+        management standards) and in turn increase the 𝛽𝛽 parameter. The global productivity factor
+        𝐴𝐴 can also be affected by conformity to legal metrology requirements. Indeed, this parameter
+        reflects the efficiency of production techniques. When 𝐴𝐴 increases, the combination of
+        production factors is more effective (more can be produced with the same quantity). This
+        parameter reflects technological progress.
+
+                                                                  The firm will use the production function and
+K                                                                 the cost function to determine the
+                                                                  combination of inputs that will give the higher
+                                                                  quantity of output, the total cost being kept
+    I                                                             constant. This can be represented graphically.
+                                                                  In figure 3 the red line I represent the
+                                                                  combination of capital and labour that can be
+                                                                  used for the same total cost. The producer will
+                                                                  want to use the one that gives the higher
+                                                                  quantity of output.
+        Figure 4 The isocost curve                        L
+
+
+
+        The isoquant curves 5, Q0, Q1 and Q2 (the
+        blue curves in figure 4) are the                      K
+
+        combination of inputs, capital and
+        labour, that produce the same quantity.
+                                                                           Q2
+        The higher an isoquant curve is, the                       Q0 Q1
+        more quantity is produced. Hence in
+        figure 4: Q0 < Q1 < Q2. The producer will                  I
+        choose the combination of inputs, that
+        belongs to his iso-cost curve and that
+        allows him to have the highest quantity
+        of output produced. On the graph, this
+        would be the point where the iso-cost
+        curve is tangent to one isoquant curve,
+        here marked by a black cross. So for a                                  Figure 3 The isoquant curves              L
+
+        given budget constraint (the iso-cost
+
+
+
+        5
+         There is an infinite number of isoquant curves; for simplicity and to facilitate the reading, we chose to only
+        represent a few of them.
+
+                                                                  39
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+curve) this one will be the most efficient combination of inputs.
+
+The parameters of the production
+function determine the isoquant
+curves. If one parameter of the
+function changes, the shapes of
+those curves will be altered. When
+𝛼𝛼 and 𝛽𝛽 increase, the shape of the
+isoquants changes. When 𝛼𝛼
+increases, the isoquant curve
+changes as shown in figure 5: less
+capital is needed to obtain the
+quantity 𝑄𝑄0 with the same
+quantity of labour
+                                                                    Figure 5: When 𝜶𝜶 increases
+
+
+
+
+                                                            When 𝛽𝛽 increases, the isoquant
+                                                            curve changes as shown in Figure
+                                                            6. Less labour is needed to
+                                                            produce the quantity 𝑄𝑄0 with the
+                                                            same quantity of capital.
+
+
+
+
+     Figure 6: When 𝜷𝜷 increases
+
+When 𝐴𝐴 changes, the form of the
+isoquant remains the same but the
+curve is translated left and
+downwards, which means that we
+can produce more with the same
+combination of factors. Indeed,
+technological change allows for a
+more efficient use of production
+factors.
+
+All the parameters of the
+production function can be                             Figure 7: variation in 𝑨𝑨
+influenced by standard adoption or
+measurement improvement. A structural change in the combination of factors used in
+
+                                               40
+                                 OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+production could come from an improvement in equipment, leading in turn to a decrease in
+the proportion of labour used. This would mean an increase in productivity with a
+modification of the 𝛼𝛼 parameter. The introduction of a new standard in management
+practices could increase the 𝛽𝛽 parameter. Finally the adoption of a new technology could
+raise the parameter for global productivity, 𝐴𝐴. Since metrological requirements – and
+specifically harmonization in legal metrology – facilitate the development and the diffusion of
+innovations, we can assume that standards boost global productivity.
+
+We have developed the functional form of the production function and underlined how
+standards and measurement improvement could influence its parameters. A change in these
+parameters 𝐴𝐴, 𝛼𝛼 and 𝛽𝛽 leads directly to an increase in profit through higher productivity.
+
+
+
+              Π ′ = 𝑝𝑝. 𝐹𝐹 ′(𝑥𝑥) − 𝑡𝑡1 . 𝑥𝑥 − 𝑡𝑡2 > Π = 𝑝𝑝. 𝐹𝐹(𝑥𝑥) − 𝑡𝑡1 . 𝑥𝑥 − 𝑡𝑡2
+
+                                    𝐹𝐹 ′ (𝑥𝑥) = 𝐴𝐴′𝐾𝐾 𝛼𝛼′ 𝐿𝐿𝛽𝛽′
+
+                                          𝑥𝑥 = (𝐾𝐾, 𝐿𝐿)
+
+
+Where at least one of the parameters 𝛼𝛼 ′ , 𝛽𝛽′ and 𝐴𝐴′ is different from its value before the
+improvement in conformity or the standard adoption.
+
+PRICE INCREASE
+
+We have explained the microeconomics foundations of the benefits legal metrology entails
+when considering the production and cost functions. Another channel through which
+conformity to standards bring gains to producers is the price. In a situation of perfect
+competition, producers are price-takers: they cannot influence prices. Modern
+microeconomics now considers different types of market configurations and examines
+situations where firms do influence the prices.
+
+QUALITY INCREASE
+
+The most obvious way by which firms can obtain a higher price for their products is an
+increase in their quality. Indeed, price can be defined as a function of the quality of the
+product (𝑞𝑞) and others demand parameters (included in the 𝑧𝑧 factor).
+
+                                         𝑝𝑝 = 𝑓𝑓(𝑞𝑞, 𝑧𝑧)
+We assume here that the price is an increasing function of the quality. We can imagine for
+example that the adoption of an environmental standard would guarantee a lower
+environmental impact, a quality valued by at least some consumers. Firms that enforce this
+standard can legitimately ask a higher price for it.
+
+                                                41
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+Another illustration is the Plasterboard case developed before. Because producers can adjust
+their production process to the quality and characteristics of the raw products, the quality of
+final product is eventually better. Thus:
+
+                              𝑝𝑝′ = 𝑓𝑓(𝑞𝑞′, 𝑧𝑧) > 𝑝𝑝 = 𝑓𝑓(𝑞𝑞, 𝑧𝑧)
+A higher price means a higher mark-up which is the difference between the cost of the good
+and its selling price.
+
+
+
+
+QUALITY CERTAINTY
+
+A higher price can only be applied if the higher quality is recognized by consumers, which is
+not certain in the absence of perfect information. Standards can then act as a signal for
+quality. Including this mechanism in our model implies we define price as a function of the
+quality, of the information available about the product (the parameter 𝑖𝑖) and other demand
+parameters:
+
+                                         𝑝𝑝 = 𝑓𝑓(𝑞𝑞, 𝑖𝑖, 𝑧𝑧)
+The use of publicly known standards increases the knowledge of consumers about the
+product which leads to a higher price:
+
+                            𝑝𝑝′ = 𝑓𝑓(𝑞𝑞, 𝑖𝑖 ′ , 𝑧𝑧) > 𝑝𝑝 = 𝑓𝑓(𝑞𝑞, 𝑖𝑖, 𝑧𝑧)
+Indeed, as previously explained, better sampling methods can enhance the bargaining power
+of suppliers during the price-setting process. Facing a more accurate measure of the
+characteristics and quantity of the product, the buyer cannot pass on the cost induced by an
+uncertainty about the product onto the price.
+
+In addition, the adoption of standards may allow producers access to new markets.
+Conformity to health, safety and quality standards, for example, may be necessary to sell on a
+regulated market, from food products to aeronautics. Adoption of standards could also be
+necessary to survive in a market facing a high supply shock such as the introduction of low-
+cost products. We illustrated this mechanism with the example of the steel fasteners market
+(Haimowitz and Warren 2007) where the INFASCO Company managed to survive the new
+competitive environment induced by the abundance of low-cost fastener from producers
+based in developing countries.
+
+The increase in quality and information on the product generates a vertical differentiation of
+products on the same market. Vertical differentiation occurs when the different goods of a
+market differ from their quality. In the case of differentiation induced by new standards, the
+price can differ from the perfect competition price but the underlined mechanisms are
+different: a new variety arises from innovation, enhanced by standards. Then the producer of
+
+
+                                                 42
+                                      OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+this new variety can benefit from a quasi-monopolistic position in this new market, at least in
+the short run.
+
+In addition, with certification of quality, information asymmetries are reduced, decreasing the
+level of adverse selection. Then the average quality on the market increases because the
+average price is now higher. Our maximisation programme becomes:
+
+
+
+               Π ′ = 𝑝𝑝′ . 𝐹𝐹 ′(𝑥𝑥) − 𝑡𝑡1 . 𝑥𝑥 − 𝑡𝑡2 > Π = 𝑝𝑝. 𝐹𝐹(𝑥𝑥) − 𝑡𝑡1 . 𝑥𝑥 − 𝑡𝑡2
+
+                                          𝐹𝐹 ′ (𝑥𝑥) = 𝐴𝐴′𝐾𝐾 𝛼𝛼′ 𝐿𝐿𝛽𝛽′
+
+                                            𝑝𝑝′ = 𝑝𝑝(𝑞𝑞 ′ , 𝑖𝑖 ′ , 𝑧𝑧)
+
+                                                𝑥𝑥 = (𝐾𝐾, 𝐿𝐿)
+
+
+
+SOCIAL WELFARE
+
+To understand the benefits brought by conformity to standards and metrological
+improvements, we need to consider the social welfare, i.e. the sum of consumers’ surplus and
+producers’ profit. We define 𝑊𝑊 the global social welfare in a particular market.
+
+                    𝑊𝑊 = � Π(p, q, t1 , 𝑡𝑡2 , 𝛼𝛼, 𝛽𝛽, 𝐴𝐴, 𝑥𝑥, 𝑖𝑖) + � 𝑈𝑈(𝑝𝑝, 𝑥𝑥, 𝑞𝑞, 𝑖𝑖, 𝑛𝑛)
+
+The profit parameters have already been defined. The price, quantity, quality and information
+also have an impact on the consumer’s utility, as explained in Part III. The consumer’s utility is
+thus represented by U, a function depending on the price, the quantity and quality of the
+product consumed. Additionally, the variety of products available, 𝑛𝑛, positively impacts their
+utility. Standard adoption and measurement improvement can thus increase social welfare as
+long as the cost of the standard implementation or conformity does not offset its benefits.
+We could add to this welfare function a cost parameter that would model the overall
+spending induced by the creation and implementation process of standard. This cost
+parameter is Cs in the following equation. Policy makers would thus have to maximise the
+following objective program:
+
+                 𝑊𝑊 = � Π(p, q, t1 , 𝑡𝑡2 , 𝛼𝛼, 𝛽𝛽, 𝐴𝐴, 𝑥𝑥, 𝑖𝑖) + � 𝑈𝑈(𝑝𝑝, 𝑥𝑥, 𝑞𝑞, 𝑖𝑖, 𝑛𝑛) − 𝐶𝐶𝑠𝑠
+
+
+
+Here, we have not specified the repartition of the costs of the standards and legal metrology
+operations. A more complete model would describe the strategy of each economic agent and
+
+
+
+                                                       43
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+examine which actors bear which costs in conformity assessment, standardization or
+measurement traceability, for example.
+
+Testing this theoretical model requires data on all the factors mentioned above. Since this
+data was not available at the time of the report we choose to focus on a specific feature of
+legal metrology: the definition and the harmonisation of the maximum permissible error of
+measuring instruments used for trade.
+
+
+
+
+                                            44
+                                         OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+VII)   CASE STUDIES: ASSESSING THE IMPACT OF THE MAXIMUM PERMISSIBLE ERROR
+       REQUIREMENTS IN THE AUSTRALIAN WHEAT, COAL AND SUGAR INDUSTRIES
+
+       One of the most central aspects of legal metrology is defining reference procedures for
+       measurements. As we saw before, a lot of efforts have been put into choosing and having all
+       Parties agree to specific units of measurements. Maximum permissible errors (MPE)
+       associated with these units have been defined by international metrology organisations such
+       as the OIML.
+
+       In our cases, the product characteristics concerning quality and quantity are numerous and
+       diverse. To simplify, we will consider only one of those features: weight. Legal metrology
+       defines guidelines and methods of enforcement regarding weight measurement in
+       transactions. When a producer sells his product to a buyer, these two Parties establish a
+       contract defining the quantity traded (in our case, weight). Whenever the shipment doesn’t
+       comply with the terms of the contract, it implies new costs. If the quantity delivered is
+       superior to the one agreed on, the seller will suffer a loss proportionate to the surplus given
+       for free. On the contrary, if the quantity delivered is inferior to the one agreed, the buyer may
+       ask for compensation. Even more problematic, the seller’s reputation could suffer an
+       intangible loss from this bad client experience.
+
+       Legal metrology defines maximum permissible errors for measuring instruments according to
+       the nominal quantity to weigh. By doing so, legal metrology facilitates the act of contracting.
+       The accuracy of the measurements depends on the quality of the measuring instruments
+       used. This parameter is the first element we have to take into account. From this quality will
+       follow the accuracy of the quantity sold.
+
+       SELECTING AN EXISTING MODEL AS A STARTING POINT
+
+       In order to quantify the economic impact of legal metrology we focus on one of its aspects
+       only: the definition of the MPE. In the following, we develop a methodology for estimating
+       the economic impact of having MPE fixed by regulations in the context of specific industries.
+       Our starting point for this model is the very interesting article of T. Usuda and A. Henson
+       (Usuda and Henson 2012). Hence, we will begin with an explanation of their impact study.
+
+       The fundamental idea of the authors is that products are distributed according to their
+       characteristics and quality. All products have to pass a conformity check before being sold.
+       Producers determine the accepted quality interval with lower and upper testing limits. If the
+       product belongs to this interval, it will be shipped to a client.
+
+
+
+
+                                                      45
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+
+
+             Figure 8: Conformity assessment. Source: (Usuda and Henson 2012)
+
+In Figure 1 a normal distribution of the product quality is assumed. Lower and upper testing
+limits are represented respectively by LTL and ULT and the products that pass the conformity
+assessment are those that fall within the interval defined by those testing limits. In general,
+this interval is the result of negotiations between buyers and sellers. For instance, a miller
+selling his flour to a bakery has to establish a contract defining the quantity, price and
+frequency of the sales. This contract may take into account error measurements. Let’s say the
+miller delivers a 50 kg bag of flour every two days. The contract may then indicate that every
+bag weighting between 49.8 kg and 50.2 kg complies with the contract conditions. In that
+case, the seller should calibrate his measuring instruments accordingly and make sure the
+measurement error doesn’t exceed 0.2 kg. If the testing limit is not regulated by law, the
+seller will set it himself and face a trade-off between buyer satisfaction and production cost
+(more accuracy in measurement requires investment).
+
+When the testing limit is not legally enforced, it may differ from sellers to buyers. Thus, in
+some cases, products that passed the seller’s conformity assessment might not pass the one
+of the buyer (false positive). Symmetrically, some products that would have passed the
+buyer’s conformity test won’t be sold (and might be lost) because they weren’t in the seller’s
+conformity interval (false negative). This idea is represented in the following figure at three
+stages of an export/import transaction:
+
+
+
+
+                                              46
+                                  OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+
+
+Figure 9: Additional loss due to deviation of measurement standards between an exporter and
+                             an importer. (Usuda and Henson 2012)
+
+As described in Figure 8 a deviation 𝜖𝜖 in the measurement standard (for the buyer in the top
+part of the figure) causes false positive and false negative products. This results in additional
+costs. If we assume a normal distribution of the products over the quality characteristics, we
+need to take the integral under the distribution function as in the top part of the graph
+(respectively circled in orange and blue) in order to derive the percentages of false negatives
+and false positives. It is important to note that the proportion of false positives is higher than
+the proportion of false negatives. It means that the loss associated with false positives and
+false negatives are not equal. Here, the distribution function of the shipped product will be
+used to derive the costs associated with this difference in testing limits. Legal metrology, by
+harmonizing testing limits, helps preventing such cases where buyer’s and seller’s conformity
+assessments are markedly disparate. International coordination is crucial to avoid these types
+of divergence between importers and exporters.
+
+The authors develop a methodology to derive the economic impact of the equivalence of
+measurement standards. They examine the industry of the analytical balance in Japan and
+assume that 99.9 % of the balanced produced passed the conformity test of the producers.
+
+                                               47
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+The conformity test used is the one defined by the OIML, stating that the masses used to
+check the accuracy of the balances must not be in error by more than one third of the
+maximum permissible error (MPE) of the instrument. The authors take the MPE of the 1 kg
+mass standard for the class F1 where the MPE is 5 mg. The mass used for the test must not be
+over or under 1.67 mg of the nominal value, 1 kg. Assuming that 99.9 % of the balances
+produced fall into the test limits defined by this conformity assessment, the distribution of
+the analytical balances produced is described in the following figure:
+
+
+
+
+            Figure 9 The distribution of analytical balances. (Usuda and Henson 2012)
+
+The authors estimated that with the actual measurement uncertainty the Japanese balance
+industry only suffers a loss of ¥6.6 million, corresponding to less than 0.04 % of its annual
+turnover. With higher deviation of the metrology standard, Japan would suffer higher loss: for
+example with a deviation of 0.5 mg of the standards, the loss would be of ¥197 million (a little
+more than 1 % of annual turnover). In addition to this loss on the balance industry turnover,
+the loss in other industries due to the uncertainty over balance measurement can also be
+estimated. Usuda and Henson take the example of the platinum industry and postulate that
+the loss due to variation in MPEs is proportionate to the price per unit.
+
+
+
+ The economic impact of a deviation in standard for industries using this measure instrument
+is given by the following equation:
+                           Δ−𝜖𝜖                                             𝛥𝛥
+                           𝐷𝐷(𝑥𝑥 − 𝜖𝜖)                                          𝐷𝐷(𝑥𝑥)
+     𝐸𝐸𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖 = ��                 𝑇𝑇𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡 𝑓𝑓(𝑚𝑚 − 𝑥𝑥)𝑑𝑑𝑑𝑑� − ��                 𝑇𝑇𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡 𝑓𝑓(𝑚𝑚 − 𝑥𝑥)𝑑𝑑𝑑𝑑�
+                      −Δ−𝜖𝜖 𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁                                   −𝛥𝛥 𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁
+
+
+
+
+                                                            48
+                                             OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+Where 𝜖𝜖 is the deviation, 𝑓𝑓(𝑚𝑚 − 𝑥𝑥)is the loss function for a deviation of x compared to the
+aimed nominal value, 0. In addition 𝑇𝑇𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡 is the quantity of product in the industry (here the
+                                                         𝐷𝐷(𝑥𝑥)
+platinum industry). Finally the fraction 𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁 represents the proportion of balances with an
+error of x. This equation computes the proportion of false positive (due to the deviation)
+minus the proportion of false negative (due to the deviation). The false positive and false
+negative product multiplied by the economic loss they create. The following figure allows
+visualizing those proportions. In this figure, the economic impact is the grey shaded area of
+the top part of the figure, minus the grey shaded area of the bottom part of the figure:
+
+
+
+
+ Figure 10 The loss associated with a deviation of measurement standards, assuming a normal
+             distribution of the measuring instrument. (Usuda and Henson 2012)
+
+One can observe that the loss with deviation of measurement standards is higher than if they
+are identical. So the economic impact associated with a deviation 𝜖𝜖 of the measurement
+standard depends on the additional fraction of products that results in false positives and
+false negatives compared to the situation without deviation.
+
+In addition the loss function is assumed to be directly proportionate to the price per unit that
+is denoted by P in the following equation:
+                        Δ−𝜖𝜖                                                    𝛥𝛥
+                             𝐷𝐷(𝑥𝑥 − 𝜖𝜖)                                            𝐷𝐷(𝑥𝑥)
+     𝐸𝐸𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖 = ��                   𝑇𝑇𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡 𝑃𝑃. |𝑚𝑚 − 𝑥𝑥|𝑑𝑑𝑑𝑑� − ��                 𝑇𝑇𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡 𝑃𝑃. |𝑚𝑚 − 𝑥𝑥|𝑑𝑑𝑑𝑑�
+                        −Δ−𝜖𝜖 𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁                                     −𝛥𝛥 𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁𝑁
+
+
+
+
+                                                                  49
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+When applied to the Japanese platinum industry, this method results in an estimated
+potential economic loss of USD228 600 dollars for a deviation of 0.5 mg. In the following
+section, we develop a similar model to show that legal metrology prevents similar economic
+loss for industries in Australia.
+
+
+
+
+APPLICATION TO THE AUSTRALIAN WHEAT, SUGAR AND COAL INDUSTRIES
+
+In this section we use the model developed by Usuda and Henson (Usuda and Henson 2012)
+as a starting point to estimate the economic loss induced by a divergence between the
+maximum permissible error in key Australian industries and their counterparts in importing
+countries. The main reason for using this model being that it is a better fit for the available
+data. Ultimately, the results attest of the need for international harmonization in legal
+metrology. We consider three sectors: sugar, coal and wheat. Those industries are of
+particular interest since Australia in 2012-2013 exported 68 % of its wheat production (22
+million tons), 54 % of its coal (481 million tons mined) and 11 % of its sugar (30 million tons
+produced). Over such quantities in large-scale industries, small variations in the maximum
+permissible errors can lead to an economic impact definitely not negligible. The figures used
+in this section have been provided by the OIML.
+
+We focus on import-export relations because variation of national metrology norms can lead
+to variation in the MPE. As we described above, deviations in the MPE from those used by the
+importer to those of the exporter, false positive and false negative errors in measurement can
+take place. In the case of weight, a false positive would consist in the shipment of a quantity
+lower than the one agreed on in the contract. The missing quantity would weight more than
+authorized by the MPE of the measuring instrument used by the importer. In that case, the
+exporter would have to compensate the importer financially. However, a false negative would
+be beneficial for the exporter since they would be able to ship less than previously arranged
+and still submit to the contractual conditions (see Fig. 2).
+
+We will first reproduce the analysis developed by (Usuda and Henson 2012) by studying the
+economic impact of a divergence between the MPEs. We will then suggest a model that could
+estimate the economic impact of having higher or lower MPE in the measuring instrument
+used for trade. Those two estimations relate to the benefits of legal metrology since the MPEs
+are regulatory standards and their enforcement falls into the domain of legal metrology. The
+traded quantities we examine are weighted by weighbridges or belt conveyors. The legally
+authorized MPE are stipulated in the Australian National Trade Measurement Regulation
+[NMT Regs 1 Jan 2013 p134-148]. We will focus on exports from the three industries
+considered. The following tables summarize the information we have on those exports.
+
+
+
+
+                                              50
+                                       OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+Table 1 Exports in the Sugar industry
+
+Product            Price                        Quantity        Measurements    MPE
+Raw Sugar          $400/t                       3 300 000 t     Weighbridge     0.1 %
+Refined Sugar      $5/kg                        500 000 t       Weighing        0.1 %
+                                                                instruments
+
+
+
+Table 2 Exports in the Wheat industry
+
+Product            Price                        Quantity        Measurements    MPE
+Bulk export        $400/t                       15 000 000 t    Weighbridge     0.1 %
+Manufactured       $200/t                       500 000 t       Weighing        0.1 %
+export                                                          instruments
+
+
+
+Table 3 Exports in the Coal industry
+
+Product            Price                        Quantity        Measurements    MPE
+Coal               $85/t                        261 000 000 t   Belt conveyor   0.5 %
+
+
+
+CALCULATING THE ECONOMIC IMPACT OF DIVERGING MPE
+
+We start with the sugar industry and will apply the same method to the other industries.
+Considering the quantity of raw sugar exported, the MPE is 0.1 % when using weighbridges. It
+implies that a measuring instrument with an accuracy of 0.1 % must be used for the
+transaction to happen. For a quantity of one tonne, the authorized margin of error is 1 kg. If
+we consider a quantity of one kg, the MPE would be +/- 1g. As did the authors in our base
+study, we estimate the economic impact of a difference in the MPEs of the seller and the
+buyer. The aim is to estimate the economic consequences of the importer and the exporter
+not having harmonized MPEs. The exporter could have a -0.1 %/+0.1 % maximum
+permissible error and the importer a MPE of (− 0.1 − 𝜖𝜖) %/ (0.1 − 𝜖𝜖) %.
+
+The following illustration represents this deviation (between purple and green intervals) and
+the false positives and negatives that ensue (respectively in red and orange).
+
+
+
+
+                                     Amount specified
+                                     in the contract
+
+
+
+
+                                                        51
+                                     -0.1%/+0.1%
+
+                         (− 0.1 − 𝜖𝜖) %/ (0.1 − 𝜖𝜖)%
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+
+
+
+As we mentioned before, false positives are associated with an economic loss for the exporter
+whereas false negatives constitute a gain. Therefore, in order to estimate the loss from MPE
+disparity we need to subtract the proportion of false negative to the proportion of false
+positive. We saw that, with a normal distribution of the instruments, those two proportions
+are not equal and the proportion of false positive tends to be bigger. The model built here
+allows estimating the economic impact of some legal metrology requirements. More
+precisely, it considers the economic benefits of fixing common MPE (and their enforcement
+modalities) for measurements instrument used for trade in exporting and importing
+countries.
+
+The legal MPE for weighbridges is +/- 1 kg per tonne. Following (Usuda and Henson 2012), we
+consider that weighbridges, when built and inspected, are tested with masses of 1 ton for
+which the measure uncertainty is no more than one third of the MPE. We obtain a Δ that
+represent the possible measurement error of the weighbridge. So the quantity measured by
+the exporter will have an accuracy of +/- Δ, times the numbers of tons. If the importer has a
+deviation 𝜖𝜖 in his MPE compared to that of the exporter, then the economic impact of such
+deviation (the loss) will be:
+                                               Δ−𝜖𝜖                                   𝛥𝛥
+         𝐸𝐸𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖 = 𝑄𝑄𝑃𝑃𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡 ���          𝐷𝐷(𝑥𝑥 − 𝜖𝜖) . |0 − 𝑥𝑥|𝑑𝑑𝑑𝑑� − �� 𝐷𝐷(𝑥𝑥) |0 − 𝑥𝑥|𝑑𝑑𝑑𝑑��
+                                          −Δ−𝜖𝜖                                      −𝛥𝛥
+
+
+
+
+This equation gives the proportion of false positive minus the proportion of false negative. We
+multiply the result by the quantity and by the price since we assume that the
+producer/exporter incurs a cost equal to the price for each false positive (and reciprocally a
+gain equal to the price for each false negative). The next table summarizes the result for the
+Sugar industry:
+
+Table 4 Economic impact on the Australian Sugar industry of a deviation of the MPE
+
+Product                       Initial MPE                      Deviation 𝜖𝜖                  Economic loss (AUD)
+Raw Sugar                     0.1 %/0.001tonne                 0.01 %/0.0001tonne            14 129.11
+Refined Sugar                 0.1 %/0.001tonne                 0.01 %/0.0001tonne            26 759.68
+Total                         0.1 %/0.001tonne                 0.01 %/0.0001tonne            40 888.79
+
+
+
+A small deviation between the Australian and the foreign MPEs (10 % of the Australian MPE)
+would cause AUD 40 888 of damages.
+
+We apply exactly the same method on the Wheat Industry and derive an economic loss of
+AUD 65 293.
+
+
+
+                                                                52
+                                 OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+Table 5 Economic impact on the Australian Wheat industry of a deviation of the MPE
+
+Product                   Initial MPE               Deviation 𝜖𝜖          Economic loss (AUD)
+Bulk export               0.1 %/0.001 tonne         0.01 %/0.0001 tonne   64 223.23
+Manufactured export       0.1 %/0.001 tonne         0.01 %/0.0001 tonne   1 070.387
+Total                     0.1 %/0.0005 tonne        0.01 %/0.0001 tonne   65 293.62
+
+
+
+The method is similar in the Coal industry but since it is not the same measuring instrument
+that is used, the initial MPE is not the same. The larger MPE results in a higher economic loss:
+indeed a deviation of 10 % of the initial MPE would lead to an economic loss of more than
+one million of Australian dollars.
+
+Table 6 Economic impact on the Australian Coal industry of a deviation of the MPE
+
+Product                   Initial MPE               Deviation 𝜖𝜖          Economic loss (AUD)
+Coal                      0.5 %/0.005 tonne         0.05 %/0.0005 tonne   1 187 327
+
+
+
+The economic impacts that we estimated were caused by a deviation of the testing limits
+between the exporter (Australia) and the importer (rest of the world). This deviation can be
+expressed as a geometric translation of the testing interval to the right. We now consider the
+case when it is the amplitude of the MPEs that differs: for example if the Australian economy
+had a larger MPE interval than the rest of the world.
+
+
+
+
+ECONOMIC IMPACT OF A LARGER PERMISSIBLE ERROR INTERVAL
+
+Legal metrology produces rules and enforcement dispositions to maintain a uniform
+measurement system nation-wide. In Australia, the National Trade Measurement legislation
+[NTP Regs 1] defines the characteristics weighbridges and belt conveyors must possess in
+order to be used in trade measurement. The penalties for non-conformity to these rules are
+stipulated as well. The measurement infrastructure and more specifically the legal
+requirements on the accuracy of the measuring instruments used for trade are also defined
+so as to benefit international trade, notably by eliminating technical barriers to trade.
+
+To further analyse the economic benefits of legal metrology, we will now turn to the benefit
+of having a given MPE value enforced by legal metrology authorities. We assume that the
+Australian MPE used for trade in Sugar and Wheat transactions is 0.2 % (so twice the current
+value) and that the one used by the importers is 0.1 %. This gap may come, in our
+
+
+                                               53
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+hypothetical case, from lack of enforcement for more accurate weighting devices in Australia.
+The difference in MPEs is described in the following figure where the green lines represent
+the importers MPE and the violet line the Australian MPE:
+                                           Amount specified
+                                           in the contract
+
+
+
+
+                                                                                                            Quantity
+
+                                           -0.1 %/+0.1 %
+
+                                           − 0.2 %/ 0.2 %
+
+
+
+The red area in the figure represents false positive but the orange one is yet another type of
+false positive: the act of sending more quantity than needed. This second type of false
+positive is also a loss for the producer since their MPE leads them to send more than sold. To
+derive the loss they suffer due to this larger MPE we now need to compute the sum of the
+two false positives.
+
+Indeed the Australian Industry will suffer losses from both types: there will be cases where
+the quantity weighed will be in accordance to the contract when weighted on an Australian
+weight instrument but will be revealed to be not in accordance to the contract when
+weighted on international weight instruments (due to the different MPEs). The red area
+represents the cases where the quantity weighted on Australian instruments was found to be
+conforming to the contract but international weighing instruments revealed that there was
+not a sufficient amount, meaning that the exporter would have to give monetary
+compensation to the importer since the quantity defined in the contract was not achieved.
+The orange area in the figure represents the case where a more accurate weigh instrument
+would have allowed the exporter to send a lesser amount that would still have conformed to
+the contract. The difference between the amount actually sent and the lesser amount that
+could have been sent with more accurate instruments is a loss for the exporter (he gave free
+quantities to the importer).
+
+The equation determining the economic loss associated with a less accurate MPE is:
+                                                 Δ+𝜖𝜖                              𝛥𝛥
+           𝐸𝐸𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖 = 𝑄𝑄𝑃𝑃𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡 ���          𝐷𝐷(𝑥𝑥) . |0 − 𝑥𝑥|𝑑𝑑𝑑𝑑� − �� 𝐷𝐷(𝑥𝑥) |0 − 𝑥𝑥|𝑑𝑑𝑑𝑑��
+                                            −Δ−𝜖𝜖                                 −𝛥𝛥
+
+
+
+
+It corresponds to the proportion of quantity falling in the orange or red area in the
+illustration. This proportion of quantity sold is then multiplied by the price and the total
+quantity.
+
+
+
+
+                                                               54
+                                  OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+Table 7 Economic impact of a less accurate MPE on the Australian Sugar industry
+
+Product                  Australian MPE       Importer MPE               Economic loss (AUD)
+Raw Sugar                0.2 %/0.002 tonne    0.1 %/0.001 tonne          105 925.3
+Refined Sugar            0.2 %/0.002 tonne    0.1 %/0.001 tonne          200 616
+Total                    0.2 %/0.002 tonne    0.1 %/0.001 tonne          306 541.3
+
+
+
+The economic impact of a less accurate MPE has to be taken into account since a slightly
+larger MPE entails a loss of AUD 306 541 for the Australian Sugar industry.
+
+On the Wheat industry:
+
+Table 8 Economic impact of a less accurate MPE on the Australian Wheat industry
+
+Product                   Australian MPE            Importer MPE           Economic loss (AUD)
+Bulk export               0.2 %/0.001 tonne         0.1 %/0.001 tonne      481 478.4
+Manufactured export       0.2 %/0.001 tonne         0.1 %/0.001 tonne      8 024.641
+Total                     0.2 %/0.001 tonne         0.1 %/0.001 tonne      489 503.1
+
+The impact of a less accurate MPE is superior to the effect of a unilateral deviation in the
+MPEs. We estimate that AUD 489 503 would be lost each year for the Wheat industry if the
+Australian measurement infrastructure was not as accurate as it currently is (In reality it is of
+0.05 %).
+
+
+
+
+Finally, if we consider the Coal industry, the impact becomes considerable:
+
+Table 9 Economic impact of a less accurate MPE on the Australian Coal industry
+
+Product                   Australia MPE             Importer MPE           Economic loss (AUD)
+Bulk export               1 %/0.01 tonne            0.5 %/0.005 tonne      8 901 333
+
+
+
+The annual impact would be around an annual AUD 9 million for the Coal industry. The annual
+impact on all the industries combined is AUD 9 697 377,4.
+
+
+
+
+                                               55
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+CONCLUSION
+
+The goal of this report was to review the literature on the economics of metrology and
+standards and provide elements for modelling the economic benefits of legal metrology.
+Macroeconomics benefits – to growth, productivity and innovation – are identified, as well as
+a way to assess the benefits of legal metrology activities – testing, verification, and
+international harmonization. But as we learned from the history of legal metrology, it
+expanded from its original applications in science and industry and now forms the backbone
+of domestic and international trade, as well as a powerful channel connecting policy and
+trade. The benefits of legal metrology have to be approached by multiple angles.
+
+From a policy standpoint, it is clear that investing in legal metrology research, enforcement
+and infrastructure impacts growth positively. From the customer perspective as well, since
+legal metrology requirements provide certainty in quality and safety along with an increased
+choice of products. Evidently, the benefits of metrology for producers are plenty, but those
+entailed by legal metrology regulation have been under less scrutiny. They are thought to be
+substantial, as our model indicates, and rely to a large extend on the international
+harmonization of legal metrology standards. It would now be interesting to extend our
+theoretical model and test it with the appropriate data. Another improvement would be to
+include the costs induced by legal metrology spending in this model.
+
+The fundamental benefit of legal metrology is that it is a network technology in itself. When
+enforced homogeneously on a market or territory, it accelerates and simplifies commercial
+transactions, all Parties benefitting from more comparability, traceability and trust. It is no
+wonder legal metrology was both a product and a precursor of the industrial revolutions of
+the past centuries. Faced with new advances in technology but also new challenges posed by
+globalization and the threat of environmental collapse, legal metrology is continuously
+adapting.
+
+
+
+
+                                               56
+                                     OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+BIBLIOGRAPHY
+
+Akerlof, G. A. (1970). "The market for" lemons": Quality uncertainty and the market mechanism." The
+quarterly journal of economics: 488-500.
+
+Bacharach, M. (1990). "Commodities, Language, and Desire." The journal of philosophy: 346-368.
+
+Barber, J. (1987). "Economic Rationale for Government Funding of Work on Measurement Standards."
+Review of DTI work on measurement standards (p. Annex 5). London: Department of Trade and
+Industry.
+
+BIPM (1998). National and international needs relating to metrology: International collaborations and
+the role of the BIPM. Paris, Bureau International des Poids et Mesures.
+
+Birch, J. (2003). "Benefit of legal metrology for the economy and society." Report-International
+Committee of Legal Metrology.
+
+Birkeland, K. (1998). Legal Metrology at the Dawn of the 21st Century: the role and responsibilities of
+the international organization of legal metrology. 33rd CIML Meeting. Seoul.
+
+Blind, K. (2004). "The economics of standards." Theory, evidence, policy. Cheltenham.
+
+Blind, K., A. Jungmittag, et al. (2000). Economic benefits of standardization, Beuth Publishers, ISBN.
+
+Bowns, S., I. Bradley, et al. (2003). "Measuring the economic benefits from R&D: improvements in the
+MMI model of the United Kingdom National Measurement System." Research policy 32(6): 991-1002.
+
+CIE (2006). Standards and the Economy, Centre for International Economics.
+
+Den Butter, F. A. and S. Groot (2007). "The transaction costs perspective on standards as a source of
+trade and productivity growth."
+
+Dixit, A. K. and J. E. Stiglitz (1977). "Monopolistic competition and optimum product diversity." The
+American Economic Review: 297-308.
+
+DTI (1999). Review of the Rationale for Economic Benefit of the UK National Measurement System.
+London, Department of Trade and Industry National Measurement System Policy Unit: 159p.
+
+Dunn, W. C. (2005). "Fundamentals of industrial instrumentation and process control."
+
+Haimowitz, J. and J. Warren (2007). Economic value of standardization. Ottawa, Standards Council of
+Canada.
+
+Howarth, P. and F. Redgrave (2008). "Metrology–in short”, EURAMET.
+
+ISO (2010). Assessing Economic Benefits of Consensus-Based Standards: The ISO Methodology.
+
+Johnson, C. D. (2006). Process Control Instrumentation Technology, Prentice-Hall Inc.
+
+Jungmittag, A., K. Blind, et al. (1999). "the Long-term Production Function: A Co-Integration Approach
+for Germany." Zeitschrift für Wirtschaftsund Sozialwissenschaften 119: 205-222.
+
+
+                                                   57
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+Kaarls, R. (2003). "Evolving needs for metrology in trade, industry and society." MAPAN—Journal of
+Metrology Society of India: 5.
+
+Kochsiek, M. and A. Odin (2001). "Towards a global measurement system: Contributions of
+international organizations." OIML Bulletin 42(2): 14-19.
+
+Miotti, H. (2009). The economic impact of standardization: technological change, standards and
+growth in France, AFNOR
+
+OIML (2011). International Vocabulary of Terms in Legal Metrology.
+
+Poposki, N., N. Majcen, et al. (2009). "Assessing publically financed metrology expenditure against
+economic parameters." Accreditation and quality assurance 14(7): 359-368.
+
+Quinn, T. and J. Kovalevsky (2005). "The development of modern metrology and its role today."
+Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences
+363(1834): 2307-2327.
+
+Robinson, A. (2007). The story of measurement, Thames and Hudson.
+
+Shintaku, J., K. Ogawa, et al. (2006). "Architecture-based approaches to international standardization
+and evolution of business models." IEC Century Challenge 2006: 19-35.
+
+Stokes, F., H. Dixon, et al. (2011). The economic benefit of standards to New-Zealand. Wellington, Berl
+Economics.
+
+Swann, G. P. (2000). "The economics of standardization." University of Manchester, Manchester, UK.
+
+Swann, G. P. (2009). The Economics of Metrology and Measurement, Report for the National
+Measurement Office. www.bis.gov.uk/assets/bispartners/nmo/docs/nms/prof-swannreport-econ-
+measurement-revisited-oct-09.pdf.
+
+Tassey, G. (2000). "Standardization in technology-based markets." Research policy 29(4): 587-602.
+
+Temple, P., K. Blind, et al. (2005). "The empirical economics of standards." DTI Economics Paper 12.
+
+Usuda, T. and A. Henson (2012). "Economic Impact of Equivalence of Measurement Standards." NCSLI
+Measure 7(1): 62-70.
+
+Whitelaw, I. (2007). A measure of all things: The story of man and measurement, Macmillan.
+
+Wise, M. N. (1997). The values of precision, Princeton University Press.
+
+WTO (2005). World Trade Report 2005: Trade, standards and the WTO. Geneva, World Trade
+Organisation.
+
+
+
+
+                                                   58
+                                   OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+APPENDIX: R CODE
+
+###Assumptions concerning weightbridge distribution ###
+#We make the same assumptions of balance distribution as Usuda:
+#First we assume that weight of 1t of class M3 are used. MPE for those: 1 000 000 mg so 1 kg
+#As in Usuda, we assume 1/3 of MPE + Normal distribution
+MPE = 0.001
+delta = MPE/3
+# We assume Npass, as in Usuda = 0.999Ntotal
+sigma = delta/3.3
+sigma
+### The Wheat industry in Australia ###
+### Exports
+###Bulk exports
+P1t = 400
+Q = 15000000
+f1<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-(x^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y1 = integrate(f1,-delta,delta)
+y1
+# # # # # # # # Loss with deviation # # # # # # #
+epsilon1 = MPE/10
+f2<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-((x-epsilon1)^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y2 = integrate(f2,-delta -epsilon1,delta -epsilon1)
+y2
+loss1 = y2[[1]] - y1[[1]]
+loss1
+#So we would have a loss of 64 223.23 dollars over the whole economy
+###Manufactured export
+P1t = 200
+Q = 500000
+f1<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-(x^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y1 = integrate(f1,-delta,delta)
+y1
+# # # # # # # # Loss with deviation # # # # # # #
+epsilon1 = MPE/10
+f2<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-((x-epsilon1)^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y2 = integrate(f2,-delta -epsilon1,delta -epsilon1)
+loss2 = y2[[1]] - y1[[1]]
+loss2
+loss1 + loss2
+
+                                                 59
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+### MPE of higher magnitude ###
+### Bulk export
+P1t = 400
+Q = 15000000
+f1<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-(x^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y1 = integrate(f1,-delta,delta)
+y1
+# # # Loss due to the higher MPE
+MPE2 = 2*MPE
+delta2 = MPE2/3
+sigma2 = delta2/3.3
+f2<-function(x){
+out<- Q*(1/(sigma2*sqrt(2*pi)))*exp((-((x)^2))/(2*(sigma2^2)))*P1t*abs(0-x)
+return(out)
+}
+y2 = integrate(f2,-delta2,delta2)
+y2
+loss = y2[[1]] - y1[[1]]
+loss
+### Manufactured exports
+P1t = 200
+Q = 500000
+f1<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-(x^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y1 = integrate(f1,-delta,delta)
+y1
+# # # # # # # Loss due to the higher MPE
+MPE2 = 2*MPE
+delta2 = MPE2/3
+sigma2 = delta2/3.3
+f2<-function(x){
+out<- Q*(1/(sigma2*sqrt(2*pi)))*exp((-((x)^2))/(2*(sigma2^2)))*P1t*abs(0-x)
+return(out)
+}
+y2 = integrate(f2,-delta2,delta2)
+loss1 = y2[[1]] - y1[[1]]
+loss1 + loss
+### The Sugar industry in Australia ###
+### Exports of raw sugar
+P1t = 400
+Q = 3300000
+
+
+
+f1<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-(x^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+
+                                                60
+                                   OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+y1 = integrate(f1,-delta,delta)
+y1
+# # # # # # # # Loss with deviation # # # # # # #
+epsilon1 = MPE/10
+f2<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-((x-epsilon1)^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y2 = integrate(f2,-delta -epsilon1,delta -epsilon1)
+loss = y2[[1]] - y1[[1]]
+loss
+### Exports of refined sugar
+P1t = 5000
+Q = 500000
+f1<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-(x^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y1 = integrate(f1,-delta,delta)
+y1
+# # # # # # # # Loss with deviation
+epsilon1 = MPE/10
+f2<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-((x-epsilon1)^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y2 = integrate(f2,-delta -epsilon1,delta -epsilon1)
+loss1 = y2[[1]] - y1[[1]]
+loss1
+loss1 + loss
+### MPE of higher magnitude ###
+P1t = 400
+Q = 3300000
+f1<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-(x^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y1 = integrate(f1,-delta,delta)
+y1
+# # # Loss due to the higher MPE
+MPE2 = 2*MPE
+delta2 = MPE2/3
+sigma2 = delta2/3.3
+f2<-function(x){
+out<- Q*(1/(sigma2*sqrt(2*pi)))*exp((-((x)^2))/(2*(sigma2^2)))*P1t*abs(0-x)
+return(out)
+}
+y2 = integrate(f2,-delta2,delta2)
+y2
+loss = y2[[1]] - y1[[1]]
+loss
+# refined sugar
+P1t = 5000
+
+                                                 61
+OIML E 7:2015 (E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+Q = 500000
+f1<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-(x^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y1 = integrate(f1,-delta,delta)
+# # # Loss due to the higher MPE
+MPE2 = 2*MPE
+delta2 = MPE2/3
+sigma2 = delta2/3.3
+f2<-function(x){
+out<- Q*(1/(sigma2*sqrt(2*pi)))*exp((-((x)^2))/(2*(sigma2^2)))*P1t*abs(0-x)
+return(out)
+}
+y2 = integrate(f2,-delta2,delta2)
+y2
+loss1 = y2[[1]] - y1[[1]]
+loss1 + loss
+### Coal industry ###
+#Not the same permissible error than in the other industries
+MPE = 0.005
+delta = MPE/3
+# We assume Npass, as in Usuda = 0.999Ntotal
+sigma = delta/3.3
+sigma
+P1t = 85
+Q = 261000000
+f1<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-(x^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y1 = integrate(f1,-delta,delta)
+# # # # # # # # Loss with deviation
+epsilon1 = MPE/10
+f2<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-((x-epsilon1)^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y2 = integrate(f2,-delta -epsilon1,delta -epsilon1)
+y2
+loss = y2[[1]] - y1[[1]]
+loss
+
+
+
+### MPE of higher magnitude ###
+f1<-function(x){
+out<- Q*(1/(sigma*sqrt(2*pi)))*exp((-(x^2))/(2*(sigma^2)))*P1t*abs(0-x)
+return(out)
+}
+y1 = integrate(f1,-delta,delta)
+y1
+# # # Loss due to the higher MPE
+
+                                                 62
+                                   OIML E 7:2015(E) MODELLING THE ECONOMIC IMPACT OF METROLOGY
+
+MPE2 = 2*MPE
+delta2 = MPE2/3
+sigma2 = delta2/3.3
+f2<-function(x){
+out<- Q*(1/(sigma2*sqrt(2*pi)))*exp((-((x)^2))/(2*(sigma2^2)))*P1t*abs(0-x)
+return(out)
+}
+y2 = integrate(f2,-delta2,delta2)
+y2
+loss = y2[[1]] - y1[[1]]
+loss
+
+
+
+
+                                                63
+
